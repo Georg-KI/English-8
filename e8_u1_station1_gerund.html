@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Living here isn't bad – Unit 1, Station 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --line:#00539C; --line-dark:#003D73; --line-50:#E6EEF6;
+  --sun:#FFD662; --sun-light:#FFF6D9;
+  --green:#2E7D32; --green-light:#E8F5E9;
+  --orange:#E07B00; --orange-light:#FFF3E0;
+  --purple:#7B3FA0; --purple-light:#F3E5F5;
+  --red:#C62828; --red-light:#FFEBEE;
+  --text:#1A1A1A; --text-2:#4A5563; --muted:#8A94A3;
+  --border:#DCE3EB; --card:#FFFFFF; --page:#F0F4F8;
+  --r-sm:8px; --r-md:12px; --r-lg:16px;
+  --shadow:0 2px 8px rgba(0,0,0,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --line:#5AA2E6; --line-dark:#8CC0F0; --line-50:#16263A;
+    --sun:#FFD662; --sun-light:#3A3218;
+    --green:#66BB6A; --green-light:#1A2E1C; --orange:#FFB74D; --orange-light:#33261A;
+    --purple:#CE93D8; --purple-light:#2C1F33; --red:#EF9A9A; --red-light:#3A1D1D;
+    --text:#E8ECF1; --text-2:#B4BDC8; --muted:#7D8794; --border:#2C3642; --card:#1B222B; --page:#12171D;
+  }
+}
+:root[data-theme="dark"]{
+  --line:#5AA2E6; --line-dark:#8CC0F0; --line-50:#16263A; --sun-light:#3A3218;
+  --green:#66BB6A; --green-light:#1A2E1C; --orange:#FFB74D; --orange-light:#33261A;
+  --purple:#CE93D8; --purple-light:#2C1F33; --red:#EF9A9A; --red-light:#3A1D1D;
+  --text:#E8ECF1; --text-2:#B4BDC8; --muted:#7D8794; --border:#2C3642; --card:#1B222B; --page:#12171D;
+}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 120px)}
+body{margin:0;font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--page);color:var(--text);font-size:17px;line-height:1.55}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+
+/* Top: the route */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--line);color:#fff;box-shadow:0 2px 12px rgba(0,40,90,.25)}
+.top-row{max-width:980px;margin:0 auto;padding:.55rem 1.2rem;display:flex;align-items:center;gap:1rem}
+.brand{font-weight:900;font-size:15px}
+.brand span{color:var(--sun)}
+.who{margin-left:auto;font-size:14px;font-weight:700;opacity:.9}
+.route{max-width:980px;margin:0 auto;padding:.2rem 1.2rem .8rem;display:flex;align-items:flex-start;position:relative}
+.route::before{content:"";position:absolute;left:calc(1.2rem + 17px);right:calc(1.2rem + 17px);top:calc(.2rem + 16px);height:5px;background:rgba(255,255,255,.28);border-radius:3px}
+.stop{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:0;color:#fff;padding:0;position:relative;min-width:0}
+.stop .dot{width:34px;height:34px;border-radius:50%;background:var(--line);border:4px solid rgba(255,255,255,.55);display:grid;place-items:center;font-weight:900;font-size:14px;transition:transform .15s}
+.stop .lbl{font-size:12px;font-weight:700;opacity:.8;text-align:center;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.stop.done .dot{background:var(--sun);border-color:var(--sun);color:#003D73}
+.stop.here .dot{border-color:#fff;background:#fff;color:var(--line);transform:scale(1.15)}
+.stop.here .lbl{opacity:1}
+@media (max-width:620px){.stop .lbl{display:none}.route{padding-bottom:.6rem}}
+
+main{max-width:820px;margin:0 auto;padding:1.4rem 1.2rem 5rem}
+.station{display:none}
+.station.active{display:block}
+
+/* Station header */
+.st-head{display:flex;gap:1rem;align-items:flex-start;margin:.4rem 0 1.2rem}
+.st-num{flex:none;width:58px;height:58px;border-radius:50%;background:var(--line);color:#fff;display:grid;place-items:center;font-weight:900;font-size:24px;border:5px solid var(--sun)}
+.st-head h1{font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.15;margin:0 0 .2rem;font-weight:900}
+.st-head p{margin:0;color:var(--text-2);font-weight:600}
+.time{display:inline-block;background:var(--sun);color:#3A2A00;font-weight:800;font-size:13px;border-radius:20px;padding:2px 10px;margin-left:.3rem;vertical-align:middle}
+
+/* Hero on start */
+.hero{background:var(--line);color:#fff;border-radius:var(--r-lg);padding:2rem 1.6rem 1.6rem;position:relative;overflow:hidden;margin-bottom:1.2rem}
+.hero h1{font-size:clamp(2rem,6vw,3.1rem);line-height:1.02;margin:0 0 .6rem;font-weight:900;max-width:14ch}
+.hero p{margin:0;max-width:52ch;font-weight:600;opacity:.92}
+.hero .rail{position:absolute;right:-30px;bottom:26px;width:62%;height:10px;background:var(--sun);border-radius:5px}
+.hero .rail i{position:absolute;top:50%;width:26px;height:26px;border-radius:50%;background:#fff;border:6px solid var(--sun);transform:translate(-50%,-50%)}
+.hero-pad{height:48px}
+
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:1.2rem 1.25rem;margin-bottom:1.1rem}
+.card h2{font-size:1.2rem;margin:0 0 .5rem;font-weight:900}
+.card h3{font-size:1.02rem;margin:1rem 0 .4rem;font-weight:800}
+.sub{color:var(--text-2);font-size:15px;margin:-.3rem 0 .8rem;font-weight:600}
+
+.task{border:1.5px solid var(--line);border-radius:var(--r-md);overflow:hidden;margin-bottom:1.1rem;background:var(--card)}
+.task-h{background:var(--line);color:#fff;padding:.7rem 1rem;display:flex;gap:.7rem;align-items:center}
+.task-h .n{width:28px;height:28px;border-radius:50%;background:var(--sun);color:#003D73;display:grid;place-items:center;font-weight:900;font-size:14px;flex:none}
+.task-h b{font-weight:800;display:block;line-height:1.2}
+.task-h small{opacity:.85;font-weight:600;font-size:13px}
+.task-b{padding:1rem 1.1rem}
+
+.box{border-radius:var(--r-sm);padding:.8rem 1rem;margin:.8rem 0;font-weight:600;font-size:15.5px;border-left:4px solid}
+.box.book{background:var(--purple-light);border-color:var(--purple)}
+.box.bycs{background:var(--line-50);border-color:var(--line)}
+.box.warn{background:var(--red-light);border-color:var(--red)}
+.box.tip{background:var(--sun-light);border-color:#E0B000}
+.box.ok{background:var(--green-light);border-color:var(--green)}
+.box p{margin:.2rem 0}
+
+.btn{border:0;border-radius:var(--r-md);padding:11px 20px;font-weight:800;font-size:15px;background:var(--line);color:#fff}
+.btn:hover{background:var(--line-dark)}
+.btn.sec{background:var(--card);color:var(--text);border:1.5px solid var(--border)}
+.btn.sec:hover{border-color:var(--line);color:var(--line)}
+.btn.sun{background:var(--sun);color:#3A2A00}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center;margin-top:.8rem}
+.nav{display:flex;justify-content:space-between;gap:.6rem;margin-top:1.4rem}
+
+input[type=text],textarea,select{background:var(--card);border:1.5px solid var(--border);border-radius:var(--r-sm);padding:7px 10px;min-width:0}
+input[type=text]:focus,textarea:focus,select:focus{border-color:var(--line);outline:none;box-shadow:0 0 0 3px var(--line-50)}
+textarea{width:100%;min-height:120px;resize:vertical;line-height:1.5}
+.gap{width:11em;max-width:100%}
+.gap.wide{width:15em}
+.right{border-color:var(--green)!important;background:var(--green-light)!important}
+.almost{border-color:#E0B000!important;background:var(--sun-light)!important}
+.wrong{border-color:var(--red)!important;background:var(--red-light)!important}
+
+ol.items{padding-left:1.4rem;margin:.3rem 0}
+ol.items li{margin:.55rem 0}
+.fb{font-size:14px;font-weight:700;margin-left:.3rem}
+.fb.g{color:var(--green)} .fb.r{color:var(--red)} .fb.y{color:#9A7400}
+.score{font-weight:900;padding:.5rem .8rem;border-radius:var(--r-sm);display:inline-block}
+
+/* flashcards */
+.fc-wrap{display:flex;flex-direction:column;align-items:center;gap:.8rem}
+.fc{width:min(420px,100%);height:190px;perspective:900px;background:none;border:0;padding:0}
+.fc-in{position:relative;width:100%;height:100%;transition:transform .45s;transform-style:preserve-3d}
+.fc.flip .fc-in{transform:rotateY(180deg)}
+.fc-face{position:absolute;inset:0;backface-visibility:hidden;border-radius:var(--r-lg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;text-align:center;border:2px solid var(--line)}
+.fc-front{background:var(--card)}
+.fc-front b{font-size:1.6rem;font-weight:900;color:var(--line)}
+.fc-front small{color:var(--muted);font-weight:700;margin-top:.4rem}
+.fc-back{background:var(--line);color:#fff;transform:rotateY(180deg)}
+.fc-back b{font-size:1.35rem;font-weight:900}
+.fc-back em{font-size:14px;opacity:.9;margin-top:.5rem;display:block}
+@media (prefers-reduced-motion:reduce){.fc-in{transition:none}}
+.fc-count{font-weight:800;color:var(--text-2)}
+
+/* who-said */
+.who-list{list-style:none;padding:0;margin:0}
+.who-list li{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid var(--border)}
+.pick{display:flex;gap:.4rem}
+.pick button{border:1.5px solid var(--border);background:var(--card);border-radius:20px;padding:4px 14px;font-weight:800;font-size:14px}
+.pick button.sel{background:var(--line);color:#fff;border-color:var(--line)}
+.pick button.sel.right{background:var(--green)!important;border-color:var(--green)!important;color:#fff}
+.pick button.sel.wrong{background:var(--red)!important;border-color:var(--red)!important;color:#fff}
+
+/* rule card */
+details.rule{border:1.5px solid var(--purple);border-radius:var(--r-md);background:var(--card);margin:.8rem 0}
+details.rule summary{padding:.7rem 1rem;font-weight:800;color:var(--purple);cursor:pointer}
+details.rule .in{padding:0 1rem 1rem}
+table.t{width:100%;border-collapse:collapse;font-size:15px}
+table.t td,table.t th{border-bottom:1px solid var(--border);padding:6px 8px;text-align:left;vertical-align:top}
+table.t th{color:var(--text-2);font-size:13px}
+.tw{overflow-x:auto}
+.g{color:var(--line);font-weight:800}
+
+.sol{display:none;margin-top:.8rem}
+.sol.show{display:block}
+
+/* can-do */
+.cando li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem;align-items:center;padding:.5rem 0;border-bottom:1px solid var(--border)}
+.cando{list-style:none;padding:0;margin:0}
+.faces button{font-size:22px;border:2px solid var(--border);background:var(--card);border-radius:50%;width:44px;height:44px;line-height:1}
+.faces button.sel{border-color:var(--line);background:var(--line-50)}
+
+.check{display:flex;gap:.6rem;align-items:flex-start;padding:.4rem 0;font-weight:600}
+.check input{width:22px;height:22px;margin-top:2px;flex:none;accent-color:var(--line)}
+
+/* result screen */
+.result{border:4px solid var(--line);border-radius:var(--r-lg);background:var(--card);padding:1.3rem;margin-bottom:1rem}
+.result h2{margin:0 0 .2rem;font-size:1.5rem;font-weight:900}
+.res-meta{color:var(--text-2);font-weight:700;margin-bottom:.8rem}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.5rem;margin:.6rem 0}
+.res-cell{background:var(--line-50);border-radius:var(--r-sm);padding:.5rem .7rem}
+.res-cell small{display:block;font-weight:700;color:var(--text-2);font-size:12.5px}
+.res-cell b{font-size:1.2rem;font-weight:900}
+.res-text{white-space:pre-wrap;background:var(--page);border-radius:var(--r-sm);padding:.7rem;font-size:15px}
+.stamp{display:inline-block;background:var(--sun);color:#3A2A00;font-weight:900;border-radius:var(--r-sm);padding:.3rem .7rem;letter-spacing:.05em}
+
+.foot{max-width:820px;margin:0 auto;padding:0 1.2rem 2rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:var(--muted);font-size:13px;font-weight:700}
+.foot button{background:none;border:0;color:var(--muted);font-weight:800;text-decoration:underline;padding:0;font-size:13px}
+
+/* teacher overlay */
+.overlay{position:fixed;inset:0;background:rgba(10,20,35,.55);display:none;align-items:flex-start;justify-content:center;z-index:50;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 2rem) 1rem 2rem}
+.overlay.show{display:flex}
+.panel{background:var(--card);border-radius:var(--r-lg);max-width:640px;width:100%;padding:1.4rem;box-shadow:0 8px 40px rgba(0,0,0,.3)}
+.panel h2{margin:.1rem 0 .6rem;font-weight:900}
+.hidden{display:none!important}
+.counter{font-weight:800;font-size:14px;color:var(--text-2);margin-top:.3rem}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-row">
+    <div class="brand">English 8 <span>·</span> Unit 1 Station 1</div>
+    <div class="who" id="whoTop"></div>
+  </div>
+  <nav class="route" id="route" aria-label="Stationen"></nav>
+</header>
+
+<main>
+
+<!-- ============ START ============ -->
+<section class="station" data-st="0">
+  <div class="hero">
+    <h1>Living here isn't bad</h1>
+    <p>Heute arbeitest du allein mit dieser Seite. Fahre die Linie Station für Station ab. Deine Antworten werden auf diesem Tablet gespeichert, auch wenn du die Seite neu lädst.</p>
+    <div class="hero-pad"></div>
+    <div class="rail"><i style="left:10%"></i><i style="left:35%"></i><i style="left:60%"></i><i style="left:85%"></i></div>
+  </div>
+
+  <div class="card">
+    <h2>Wer bist du?</h2>
+    <p class="sub">Dein Name erscheint am Ende auf dem Ergebnis-Screenshot.</p>
+    <div class="row" style="margin-top:0">
+      <input type="text" id="name" data-save="name" placeholder="Vorname Nachname" style="flex:1;min-width:200px">
+      <input type="text" id="klasse" data-save="klasse" placeholder="Klasse, z. B. 8b" style="width:140px">
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Dein Fahrplan für die Doppelstunde</h2>
+    <div class="tw"><table class="t">
+      <tr><th>Station</th><th>Was du machst</th><th>Zeit</th></tr>
+      <tr><td><b>1</b> New words</td><td>Vokabeln von S. 12–14 lernen und prüfen</td><td>15 min</td></tr>
+      <tr><td><b>2</b> Lena &amp; Matt</td><td>Text im Buch S. 12 lesen und verstehen</td><td>15 min</td></tr>
+      <tr><td><b>3</b> Find the rule</td><td>Die Regel für das gerund selbst entdecken</td><td>20 min</td></tr>
+      <tr><td><b>4</b> Practice</td><td>Buch S. 13–14 und Übungen hier</td><td>20 min</td></tr>
+      <tr><td><b>5</b> Your turn</td><td>Sprechen, Schreiben, Exit-Quiz</td><td>15 min</td></tr>
+      <tr><td><b>6</b> Abgabe</td><td>Screenshot machen und in ByCS hochladen</td><td>5 min</td></tr>
+    </table></div>
+  </div>
+
+  <div class="card">
+    <h2>Today's goals</h2>
+    <ol class="items">
+      <li>I can understand two teenagers talking about their new life in the US.</li>
+      <li>I can explain what a gerund is and when I need one.</li>
+      <li>I can talk and write about things I like and dislike using gerunds.</li>
+    </ol>
+  </div>
+
+  <div class="box tip"><p><b>Das brauchst du:</b> Tablet, Buch Green Line 4, Heft, Kopfhörer sind nicht nötig. Die Arbeitsblätter findest du im ByCS-Kurs.</p></div>
+
+  <div class="nav"><span></span><button class="btn" data-go="1">Los geht's zu Station 1</button></div>
+</section>
+
+<!-- ============ STATION 1 VOCAB ============ -->
+<section class="station" data-st="1">
+  <div class="st-head"><div class="st-num">1</div><div><h1>New words <span class="time">15 min</span></h1><p>Die Wörter von Station 1 (Vocabulary S. 184 ff.)</p></div></div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">a</div><div><b>Flip the cards</b><small>Einzelarbeit · 5 min</small></div></div>
+    <div class="task-b">
+      <p style="margin-top:0">Lies das englische Wort, sag die Bedeutung leise vor dich hin und dreh dann die Karte um. Weißt du es nicht, markiere es mit <b>Nochmal</b>.</p>
+      <div class="fc-wrap">
+        <button class="fc" id="fc" aria-label="Karte umdrehen"><div class="fc-in">
+          <div class="fc-face fc-front"><b id="fcEn"></b><small>Tippen zum Umdrehen</small></div>
+          <div class="fc-face fc-back"><b id="fcDe"></b><em id="fcEx"></em></div>
+        </div></button>
+        <div class="fc-count" id="fcCount"></div>
+        <div class="row" style="margin:0;justify-content:center">
+          <button class="btn sec" id="fcAgain">Nochmal</button>
+          <button class="btn" id="fcKnow">Kann ich</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">b</div><div><b>Fill the gaps</b><small>Einzelarbeit · 6 min · tippen und prüfen</small></div></div>
+    <div class="task-b">
+      <p style="margin-top:0">Setze das passende Wort oder die passende Wendung ein. Kleine Tippfehler werden gelb markiert.</p>
+      <ol class="items" id="vocGaps"></ol>
+      <div class="row"><button class="btn" data-check="voc">Prüfen</button><span class="score" id="score-voc"></span></div>
+    </div>
+  </div>
+
+  <div class="box bycs">
+    <p><b>ByCS-Kurs → Arbeitsblatt „Living in the US“</b> (4 min)</p>
+    <p>Bearbeite Aufgabe 1 und 3 im Heft oder auf dem Tablet. Aufgabe 2 ist freiwillig. Kontrolliere danach mit dem QR-Code „Lösungs-Check by HERBY“ oben rechts auf dem Blatt und verbessere mit einer anderen Farbe.</p>
+  </div>
+
+  <div class="nav"><button class="btn sec" data-go="0">Zurück</button><button class="btn" data-go="2">Weiter zu Station 2</button></div>
+</section>
+
+<!-- ============ STATION 2 READING ============ -->
+<section class="station" data-st="2">
+  <div class="st-head"><div class="st-num">2</div><div><h1>Lena &amp; Matt <span class="time">15 min</span></h1><p>Two different experiences in America</p></div></div>
+
+  <div class="box book"><p><b>Buch S. 12:</b> Lies die zwei Chat-Nachrichten von Lena und Matt genau. Lena kommt aus Hamburg, Matt aus Cambridge. Beide leben seit Kurzem in den USA.</p></div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">a</div><div><b>Lena or Matt?</b><small>Einzelarbeit · 7 min</small></div></div>
+    <div class="task-b">
+      <p style="margin-top:0">Who is it? Tippe auf den richtigen Namen. Schau im Text nach, wenn du unsicher bist.</p>
+      <ul class="who-list" id="whoList"></ul>
+      <div class="row"><button class="btn" data-check="who">Prüfen</button><span class="score" id="score-who"></span></div>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">b</div><div><b>Whose situation sounds better to you?</b><small>Buch S. 12/1 · Einzelarbeit · 8 min</small></div></div>
+    <div class="task-b">
+      <p style="margin-top:0">Schreibe 3–4 Sätze auf Englisch. Vergleiche Lena und Matt und begründe deine Meinung.</p>
+      <div class="box tip" style="margin-top:0"><p>Hilfe: <i>Lena lives in … but Matt … / In my opinion, … sounds better because … / I think living in … is … / I wouldn't like …</i></p></div>
+      <textarea data-save="compare" placeholder="In my opinion, ..."></textarea>
+      <div class="counter" data-count="compare"></div>
+    </div>
+  </div>
+
+  <div class="nav"><button class="btn sec" data-go="1">Zurück</button><button class="btn" data-go="3">Weiter zu Station 3</button></div>
+</section>
+
+<!-- ============ STATION 3 RULE ============ -->
+<section class="station" data-st="3">
+  <div class="st-head"><div class="st-num">3</div><div><h1>Find the rule <span class="time">20 min</span></h1><p>What is a gerund?</p></div></div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">a</div><div><b>Look closely</b><small>Buch S. 13/3 · Einzelarbeit · 4 min</small></div></div>
+    <div class="task-b">
+      <p style="margin-top:0">Vergleiche die Sätze. Links steht ein Nomen, rechts eine <i>-ing</i>-Form an derselben Stelle.</p>
+      <div class="tw"><table class="t">
+        <tr><th>Nomen</th><th>-ing-Form</th></tr>
+        <tr><td><b>Pizza</b> is my favourite food.</td><td><span class="g">Cooking</span> is my favourite hobby.</td></tr>
+        <tr><td>I love <b>music</b>.</td><td>I love <span class="g">dancing</span>.</td></tr>
+        <tr><td>She's afraid of <b>dogs</b>.</td><td>She's afraid of <span class="g">flying</span>.</td></tr>
+      </table></div>
+      <h3>Complete the rule</h3>
+      <p>A gerund is a <input type="text" class="gap" data-q="rule" data-i="0" data-save="rule0" aria-label="Lücke 1"> form (verb + <input type="text" class="gap" style="width:5em" data-q="rule" data-i="1" data-save="rule1" aria-label="Lücke 2">).
+      You can use it like a <input type="text" class="gap" data-q="rule" data-i="2" data-save="rule2" aria-label="Lücke 3">.</p>
+      <div class="row"><button class="btn" data-check="rule">Prüfen</button><span class="score" id="score-rule"></span></div>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">b</div><div><b>Four ways to use a gerund</b><small>Einzelarbeit · 6 min</small></div></div>
+    <div class="task-b">
+      <p style="margin-top:0">Wo steht das gerund? Wähle für jeden Satz die passende Verwendung.</p>
+      <div class="tw"><table class="t">
+        <tr><td><b>A</b></td><td>as the <b>subject</b> of the sentence (am Satzanfang)</td></tr>
+        <tr><td><b>B</b></td><td>after certain <b>verbs</b> (enjoy, miss, keep, avoid …)</td></tr>
+        <tr><td><b>C</b></td><td>after a <b>preposition</b> (good at, afraid of, look forward to …)</td></tr>
+        <tr><td><b>D</b></td><td>after certain <b>expressions</b> (It's no use, It's worth, How about …)</td></tr>
+      </table></div>
+      <ol class="items" id="sortList"></ol>
+      <div class="row"><button class="btn" data-check="sort">Prüfen</button><span class="score" id="score-sort"></span></div>
+    </div>
+  </div>
+
+  <details class="rule">
+    <summary>Regelkarte G1 aufklappen (Grammar S. 161–163)</summary>
+    <div class="in">
+      <p><b>Bildung:</b> verb + -ing. Schreibregeln wie beim present participle: <i>live → living, get → getting, try → trying</i>.</p>
+      <p><b>Deutsch:</b> meist mit Infinitiv: <i>I miss seeing my friends.</i> = Ich vermisse es, meine Freunde zu sehen.</p>
+      <div class="tw"><table class="t">
+        <tr><th>Wo?</th><th>Signalwörter</th></tr>
+        <tr><td>nach Verben</td><td>enjoy, mind, miss, keep, avoid, finish, imagine, suggest</td></tr>
+        <tr><td>Adjektiv + Präposition</td><td>afraid of, scared of, tired of, good at, crazy about, interested in, worried about</td></tr>
+        <tr><td>Verb + Präposition</td><td>look forward to, get used to, feel like, think of, talk about, dream of</td></tr>
+        <tr><td>als Teil einer adverbialen Bestimmung</td><td>by, without, instead of, in spite of, apart from</td></tr>
+        <tr><td>feste Wendungen</td><td>It's no use / no good …, There's no point in …, It's worth …, How / What about …?</td></tr>
+      </table></div>
+      <div class="box warn"><p>❗ <b>would like / would love</b> steht immer mit <b>to + Infinitiv</b>: <i>I'd like to go home.</i></p><p>❗ Bei <b>look forward to</b> und <b>get used to</b> ist <i>to</i> eine Präposition: <i>I'm looking forward to seeing you.</i></p></div>
+    </div>
+  </details>
+
+  <div class="box bycs">
+    <p><b>ByCS-Kurs → Arbeitsblatt „Find the rule: The gerund“</b> (10 min)</p>
+    <p>Bearbeite Aufgabe 1 a–c und Aufgabe 2. Erst selbst lösen, dann mit dem HERBY-QR-Code kontrollieren und verbessern.</p>
+  </div>
+
+  <div class="nav"><button class="btn sec" data-go="2">Zurück</button><button class="btn" data-go="4">Weiter zu Station 4</button></div>
+</section>
+
+<!-- ============ STATION 4 PRACTICE ============ -->
+<section class="station" data-st="4">
+  <div class="st-head"><div class="st-num">4</div><div><h1>Practice <span class="time">20 min</span></h1><p>Gerunds in action</p></div></div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">a</div><div><b>Sophie's first impressions</b><small>Buch S. 13/4 · Einzelarbeit · 6 min</small></div></div>
+    <div class="task-b">
+      <div class="box book" style="margin-top:0"><p>Lies Sophies Post im Buch S. 13/4. Trage hier nur die fehlenden gerunds für die Lücken 1–8 ein.</p></div>
+      <ol class="items" id="sophie"></ol>
+      <div class="row"><button class="btn" data-check="sophie">Prüfen</button><span class="score" id="score-sophie"></span></div>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">b</div><div><b>Gerunds in phrases</b><small>Buch S. 14/5 · Einzelarbeit · 5 min</small></div></div>
+    <div class="task-b">
+      <div class="box book" style="margin-top:0"><p>Lies Matts Antwort im Buch S. 14/5. Welche Wendung aus dem gelben Kasten gehört in welche Lücke?</p></div>
+      <ol class="items" id="matt"></ol>
+      <div class="row"><button class="btn" data-check="matt">Prüfen</button><span class="score" id="score-matt"></span></div>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">c</div><div><b>Rewrite Lena's and Kaitlyn's sentences</b><small>Buch S. 14/6 · Heft · 7 min</small></div></div>
+    <div class="task-b">
+      <p style="margin-top:0">Schreibe die Sätze 2–8 aus dem Buch mit den Wendungen im gelben Kasten und einem gerund <b>in dein Heft</b>. Die Bedeutung darf sich nicht ändern. Beispiel 1 steht im Buch.</p>
+      <label class="check"><input type="checkbox" data-save="s6done" id="s6done"> Ich habe alle Sätze 2–8 in mein Heft geschrieben.</label>
+      <div class="row"><button class="btn sec" id="s6btn" disabled>Musterlösung zeigen</button></div>
+      <div class="sol" id="s6sol"><div class="box ok">
+        <p>2. I'm thinking of going to the mall.</p>
+        <p>3. Mom keeps telling me to unpack.</p>
+        <p>4. I've stopped wearing crazy T-shirts to school.</p>
+        <p>5. My brother started driving when he was 16.</p>
+        <p>6. Are you interested in meeting more people in the area?</p>
+        <p>7. I'm looking forward to planning our Thanksgiving party.</p>
+        <p>8. I love listening to music.</p>
+        <p style="font-weight:700;opacity:.8">Andere Lösungen können auch richtig sein, z. B. <i>I really look forward to …</i> Vergleiche Wendung und gerund, nicht jedes Wort.</p>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">+</div><div><b>Watch out: gerund or to?</b><small>Einzelarbeit · 2 min · für alle</small></div></div>
+    <div class="task-b">
+      <p style="margin-top:0">Wähle die richtige Form. Achtung, zwei Sätze brauchen <b>kein</b> gerund.</p>
+      <ol class="items" id="trap"></ol>
+      <div class="row"><button class="btn" data-check="trap">Prüfen</button><span class="score" id="score-trap"></span></div>
+    </div>
+  </div>
+
+  <div class="nav"><button class="btn sec" data-go="3">Zurück</button><button class="btn" data-go="5">Weiter zu Station 5</button></div>
+</section>
+
+<!-- ============ STATION 5 YOUR TURN ============ -->
+<section class="station" data-st="5">
+  <div class="st-head"><div class="st-num">5</div><div><h1>Your turn <span class="time">15 min</span></h1><p>Likes and dislikes</p></div></div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">a</div><div><b>Talk to your partner</b><small>Buch S. 14/7a · Partnerarbeit · 4 min · leise sprechen</small></div></div>
+    <div class="task-b">
+      <p style="margin-top:0">Erzählt euch abwechselnd, was ihr mögt und nicht mögt. Jede Person sagt mindestens <b>4 Sätze mit gerund</b>. Fragt nach: <i>What about you?</i></p>
+      <div class="box tip" style="margin-top:0"><p>love · hate · enjoy · dislike · dream of · be tired of · be interested in · be scared of · be worried about · be good at · be crazy about</p></div>
+      <label class="check"><input type="checkbox" data-save="talkdone"> Wir haben beide mindestens 4 Sätze gesagt.</label>
+      <input type="text" data-save="partner" placeholder="Name deines Partners / deiner Partnerin" style="width:100%;max-width:360px">
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">b</div><div><b>First day in the hallway</b><small>Buch S. 14/7b · Einzelarbeit · 6 min</small></div></div>
+    <div class="task-b">
+      <p style="margin-top:0">Stell dir vor, du stehst an deinem ersten Schultag an einer amerikanischen Highschool im Flur. Was geht dir durch den Kopf? Schreibe <b>5–6 Sätze</b> und nutze <b>mindestens 3 gerunds</b>.</p>
+      <textarea data-save="hallway" placeholder="I'm standing in the hallway and ..."></textarea>
+      <div class="counter" data-count="hallway"></div>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">c</div><div><b>Exit quiz</b><small>Einzelarbeit · 3 min · nur ein Versuch</small></div></div>
+    <div class="task-b">
+      <ol class="items" id="exit"></ol>
+      <div class="row"><button class="btn" data-check="exit" id="exitBtn">Abgeben</button><span class="score" id="score-exit"></span></div>
+    </div>
+  </div>
+
+  <div class="task">
+    <div class="task-h"><div class="n">d</div><div><b>How well can you do it?</b><small>Selbsteinschätzung · 1 min</small></div></div>
+    <div class="task-b"><ul class="cando" id="cando"></ul></div>
+  </div>
+
+  <div class="nav"><button class="btn sec" data-go="4">Zurück</button><button class="btn" data-go="6">Zum Ergebnis</button></div>
+</section>
+
+<!-- ============ STATION 6 RESULT ============ -->
+<section class="station" data-st="6">
+  <div class="st-head"><div class="st-num">6</div><div><h1>Abgabe <span class="time">5 min</span></h1><p>Screenshot machen und in ByCS hochladen</p></div></div>
+
+  <div class="result" id="result"></div>
+
+  <div class="box bycs">
+    <p><b>So gibst du ab:</b></p>
+    <p>1. Mach einen Screenshot vom blauen Kasten oben. Auf dem iPad: obere Taste + Lauter-Taste gleichzeitig drücken. Passt nicht alles drauf, mach zwei Screenshots.</p>
+    <p>2. Öffne den ByCS-Kurs und lade die Screenshots in der Abgabe für heute hoch.</p>
+    <p>3. Zeig der Aufsicht kurz, dass du abgegeben hast.</p>
+  </div>
+
+  <div class="card">
+    <h2>Schon fertig? Bonus</h2>
+    <p style="margin:0">Schreibe eine kurze Nachricht an Lena (4–5 Sätze) mit Tipps gegen Heimweh. Nutze <i>How about …, It's worth …, There's no point in …</i> und <i>Try + gerund</i>. Wiederhole danach die Karten bei Station 1, die du mit „Nochmal“ markiert hast.</p>
+  </div>
+
+  <div class="nav"><button class="btn sec" data-go="5">Zurück</button><span></span></div>
+</section>
+</main>
+
+<div class="foot">
+  <span>Green Line 4 · Unit 1 · Station 1 · Vertretungsstunde</span>
+  <span><button id="teacherBtn">Aufsicht</button> · <button id="themeBtn">Hell/Dunkel</button></span>
+</div>
+
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Aufsicht">
+  <div class="panel">
+    <div id="pinBox">
+      <h2>Aufsicht</h2>
+      <p>Bitte PIN eingeben.</p>
+      <div class="row" style="margin-top:0"><input type="text" id="pin" inputmode="numeric" style="width:140px"><button class="btn" id="pinOk">Öffnen</button><button class="btn sec" data-close>Schließen</button></div>
+      <p class="fb r hidden" id="pinErr">PIN falsch.</p>
+    </div>
+    <div id="tBox" class="hidden">
+      <h2>Hinweise für die Aufsicht</h2>
+      <p>Die Klasse arbeitet selbstständig mit dieser Seite. Fachliche Hilfe ist nicht nötig; alle Aufgaben kontrollieren sich selbst oder haben Lösungen.</p>
+      <div class="tw"><table class="t">
+        <tr><th>ab Minute</th><th>Die Schüler sollten sein bei …</th></tr>
+        <tr><td>0</td><td>Start: Name eintragen</td></tr>
+        <tr><td>5</td><td>Station 1 New words</td></tr>
+        <tr><td>20</td><td>Station 2 Lena &amp; Matt</td></tr>
+        <tr><td>35</td><td>Station 3 Find the rule</td></tr>
+        <tr><td>55</td><td>Station 4 Practice</td></tr>
+        <tr><td>75</td><td>Station 5 Your turn (kurz Partnerarbeit, leise)</td></tr>
+        <tr><td>85</td><td>Station 6 Screenshot in ByCS hochladen</td></tr>
+      </table></div>
+      <div class="box tip">
+        <p><b>Wenn …</b></p>
+        <p>… ein Tablet fehlt: zu zweit an einem Tablet arbeiten, beide Namen eintragen.</p>
+        <p>… jemand früher fertig ist: Bonus-Aufgabe bei Station 6.</p>
+        <p>… die Seite neu lädt: Antworten bleiben gespeichert, einfach weitermachen.</p>
+        <p>… jemand abgibt: kurz auf den Ergebnis-Screen schauen; es sollte der Tagescode <b id="dayCode"></b> zu sehen sein.</p>
+      </div>
+      <div class="row"><button class="btn sec" data-close>Schließen</button></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- storage ---------- */
+const KEY='e8-u1-s1-gerund-v1';
+let S={};
+try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){S={}}
+S.vals=S.vals||{};S.scores=S.scores||{};S.fc=S.fc||{again:[],idx:0};S.cando=S.cando||{};S.st=S.st||0;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+/* ---------- data ---------- */
+const VOCAB=[
+ ['curfew','Sperrstunde, Ausgangssperre','Teens in many US towns have a curfew.'],
+ ['to be homesick','Heimweh haben','She was homesick for Germany.'],
+ ['in spite of','trotz','In spite of the snow, school was open.'],
+ ['How about + gerund?','Wie wäre es mit …?','How about playing a game?'],
+ ['to meet up','sich treffen','Let\'s meet up after school.'],
+ ['downtown (AE)','Stadtzentrum; im Stadtzentrum','BE: in the city centre'],
+ ['to get used to sth','sich an etw. gewöhnen','I\'ve got used to the early bus.'],
+ ['elevator (AE)','Aufzug, Lift','BE: lift'],
+ ['by + gerund','indem','You learn words by repeating them.'],
+ ['luckily','glücklicherweise','luck → lucky → luckily'],
+ ['It\'s no use + gerund','Es nützt nichts …','It\'s no use crying.'],
+ ['I\'m afraid …','Leider …','I\'m afraid I can\'t come.'],
+ ['to keep in touch','in Kontakt bleiben','= to stay in touch'],
+ ['to keep + gerund','weiter tun; immer wieder tun','He keeps asking questions.'],
+ ['in sb\'s opinion','jmds. Meinung nach','In my opinion, it\'s great.'],
+ ['impression','Eindruck','my first impression of the US'],
+ ['messy','unordentlich','a messy desk'],
+ ['to find one\'s way around','sich zurechtfinden','It\'s easy to find your way around.'],
+ ['to unpack','auspacken','to unpack ↔ to pack'],
+ ['to dislike','nicht mögen','to dislike ↔ to like'],
+ ['to be crazy about','verrückt sein nach','She\'s crazy about horses.'],
+ ['insecure','unsicher','insecure ↔ confident'],
+ ['mind','Geist, Verstand, Kopf','What\'s going through your mind?']
+];
+const Q={
+ voc:[
+  ['Teens here have a strict ',' : they must be home by 10 p.m.',['curfew']],
+  ['After two weeks at summer camp, Tom was really ',' and missed his family.',['homesick']],
+  ['',' the rain, we played football outside.',['in spite of']],
+  ['Our flat is on the 15th floor, so we always take the ','.',['elevator','lift']],
+  ['My brother\'s room is so ',' – there are clothes everywhere!',['messy']],
+  ['',' , I found my phone under the sofa just before the bus came.',['luckily']],
+  ['I felt ',' on my first day because I didn\'t know anybody.',['insecure']],
+  ['It took me a week to find my ',' in the new town.',['way around']],
+  ['Let\'s keep in ',' – send me a message sometimes!',['touch']],
+  ['I arrived yesterday, but I haven\'t had time to ',' my suitcase yet.',['unpack']]
+ ],
+ rule:[['verb'],['ing','-ing'],['noun']],
+ sort:[
+  ['Swimming in the lake is my favourite thing in summer.','A'],
+  ['Matt enjoys living close to downtown.','B'],
+  ['Lena is scared of losing touch with her friends.','C'],
+  ['It\'s no use being homesick.','D'],
+  ['Getting up at six is hard for me.','A'],
+  ['My cousin keeps forgetting his keys.','B'],
+  ['We\'re looking forward to visiting New York.','C'],
+  ['How about meeting up on Saturday?','D']
+ ],
+ sophie:[
+  ['1','living',['living']],
+  ['2','(share)',['sharing','having']],
+  ['3','(have)',['having','sharing']],
+  ['4','(be)',['being']],
+  ['5','(hang out)',['hanging out']],
+  ['6','(travel)',['travelling','traveling']],
+  ['7','(cycle)',['cycling']],
+  ['8','(cycle)',['cycling']]
+ ],
+ matt:[
+  ['1',['worry about']],['2',['get used to']],['3',['tired of']],['4',['good at']],
+  ['5',['scared of']],['6',['thinking of']],['7',['feel like']],['8',['looking forward to']]
+ ],
+ trap:[
+  ['I\'d like ___ a film tonight.',['watching','to watch','watch'],1],
+  ['I really miss ___ my old friends.',['to see','seeing','see'],1],
+  ['She avoids ___ about her problems.',['talking','to talk','talk'],0],
+  ['We walked instead of ___ for the bus.',['to wait','wait','waiting'],2],
+  ['He would love ___ to Canada one day.',['going','to go','go'],1],
+  ['It\'s worth ___ the museum.',['visiting','to visit','visit'],0]
+ ],
+ exit:[
+  ['Which sentence is correct?',['I enjoy to play tennis.','I enjoy playing tennis.','I enjoy play tennis.'],1],
+  ['___ new friends can be difficult.',['Find','To finding','Finding'],2],
+  ['I\'m looking forward to ___ you.',['see','seeing','have seen'],1],
+  ['Which sentence is correct?',['I\'d like going home.','I\'d like to go home.','I\'d like go home.'],1],
+  ['"Es lohnt sich, es auszuprobieren."',['It\'s worth trying.','It\'s worth to try.','It worths trying.'],0]
+ ]
+};
+const CANDO=['I can understand Lena\'s and Matt\'s messages.','I can explain what a gerund is.','I can talk about likes and dislikes with gerunds.'];
+const MATT_OPTS=['looking forward to','worry about','feel like','thinking of','tired of','good at','scared of','get used to'];
+const STOPS=['Start','New words','Lena & Matt','Find the rule','Practice','Your turn','Abgabe'];
+const TOTAL={voc:10,who:10,rule:3,sort:8,sophie:8,matt:8,trap:6,exit:5};
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+function norm(s){return (s||'').toLowerCase().replace(/[’`´]/g,"'").replace(/[.,!?;:"()]/g,'').replace(/\s+/g,' ').trim()}
+function lev(a,b){const m=[];for(let i=0;i<=a.length;i++){m[i]=[i];for(let j=1;j<=b.length;j++)m[i][j]=i?Math.min(m[i-1][j]+1,m[i][j-1]+1,m[i-1][j-1]+(a[i-1]===b[j-1]?0:1)):j}return m[a.length][b.length]}
+function judge(v,acc){v=norm(v);if(!v)return 'wrong';for(const a of acc){if(v===norm(a))return 'right'}for(const a of acc){const n=norm(a);if(n.length>4&&lev(v,n)<=1)return 'almost'}return 'wrong'}
+function mark(el,r){el.classList.remove('right','almost','wrong');el.classList.add(r)}
+function setScore(k,n){S.scores[k]=n;save();showScore(k)}
+function showScore(k){const el=$('#score-'+k);if(!el||S.scores[k]==null)return;const n=S.scores[k],t=TOTAL[k];el.textContent=n+' / '+t+(n===t?'  Super!':'  – verbessere die roten Felder');el.style.background=n===t?'var(--green-light)':'var(--sun-light)';el.style.color=n===t?'var(--green)':'#7A5B00'}
+function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+
+/* ---------- build ---------- */
+$('#route').innerHTML=STOPS.map((s,i)=>`<button class="stop" data-go="${i}"><span class="dot">${i||'★'}</span><span class="lbl">${s}</span></button>`).join('');
+
+$('#vocGaps').innerHTML=Q.voc.map((q,i)=>`<li>${esc(q[0])}<input type="text" class="gap" data-q="voc" data-i="${i}" data-save="voc${i}" aria-label="Lücke ${i+1}">${esc(q[1])}</li>`).join('');
+
+const WHO=[['lives in the country, where the suburbs end.','L'],['lives very high up in an apartment building.','M'],['misses having a garden.','M'],['is homesick.','L'],['goes to many places by bus.','M'],['has a friend with a very strict curfew.','L'],['is looking forward to starting school.','M'],['is scared of losing touch with old friends.','L'],['is good at sports and hopes this will help at school.','M'],['would like to meet up in Pittsburgh.','L']];
+$('#whoList').innerHTML=WHO.map((w,i)=>`<li><span>${i+1}. … ${esc(w[0])}</span><span class="pick" data-who="${i}"><button data-v="L">Lena</button><button data-v="M">Matt</button></span></li>`).join('');
+
+$('#sortList').innerHTML=Q.sort.map((q,i)=>`<li>${esc(q[0])} <select data-q="sort" data-i="${i}" data-save="sort${i}" aria-label="Verwendung"><option value="">–</option><option>A</option><option>B</option><option>C</option><option>D</option></select><span class="fb" id="sortfb${i}"></span></li>`).join('');
+
+$('#sophie').innerHTML=Q.sophie.map((q,i)=>`<li>Lücke ${q[0]} ${i===0?'<i>(live)</i>':'<i>'+q[1]+'</i>'}: <input type="text" class="gap" data-q="sophie" data-i="${i}" data-save="soph${i}" aria-label="Lücke ${q[0]}"></li>`).join('');
+$('#sophie').insertAdjacentHTML('afterend','<p class="sub" style="margin-top:.4rem">Tipp: Die Wörter stehen im Buch nicht in der richtigen Reihenfolge. <i>move</i> ist schon verwendet, <i>cycle</i> brauchst du zweimal.</p>');
+
+$('#matt').innerHTML=Q.matt.map((q,i)=>`<li>Lücke ${q[0]}: <select data-q="matt" data-i="${i}" data-save="matt${i}" aria-label="Lücke ${q[0]}"><option value="">– wählen –</option>${MATT_OPTS.map(o=>`<option>${o}</option>`).join('')}</select><span class="fb" id="mattfb${i}"></span></li>`).join('');
+
+function mc(key,arr){return arr.map((q,i)=>`<li>${esc(q[0])}<div class="pick" style="flex-wrap:wrap;margin-top:.3rem" data-mc="${key}" data-i="${i}">${q[1].map((o,j)=>`<button data-v="${j}">${esc(o)}</button>`).join('')}</div></li>`).join('')}
+$('#trap').innerHTML=mc('trap',Q.trap);
+$('#exit').innerHTML=mc('exit',Q.exit);
+
+$('#cando').innerHTML=CANDO.map((c,i)=>`<li><span>${esc(c)}</span><span class="faces" data-cd="${i}"><button data-v="3" aria-label="gut">😀</button><button data-v="2" aria-label="teilweise">🙂</button><button data-v="1" aria-label="noch nicht">😕</button></span></li>`).join('');
+
+/* ---------- restore saved values ---------- */
+$$('[data-save]').forEach(el=>{
+  const k=el.dataset.save;
+  if(S.vals[k]!=null){ if(el.type==='checkbox')el.checked=S.vals[k]; else el.value=S.vals[k]; }
+  el.addEventListener(el.type==='checkbox'||el.tagName==='SELECT'?'change':'input',()=>{
+    S.vals[k]=el.type==='checkbox'?el.checked:el.value;save();
+    if(k==='name'||k==='klasse')showWho();
+    if(k==='s6done')s6();
+    count(k);
+  });
+});
+S.vals.who=S.vals.who||{};S.vals.mc=S.vals.mc||{};
+$$('[data-who]').forEach(p=>{const i=p.dataset.who;p.querySelectorAll('button').forEach(b=>{if(S.vals.who[i]===b.dataset.v)b.classList.add('sel');b.onclick=()=>{p.querySelectorAll('button').forEach(x=>x.classList.remove('sel','right','wrong'));b.classList.add('sel');S.vals.who[i]=b.dataset.v;save()}})});
+$$('[data-mc]').forEach(p=>{const k=p.dataset.mc+p.dataset.i;p.querySelectorAll('button').forEach(b=>{if(S.vals.mc[k]===b.dataset.v)b.classList.add('sel');b.onclick=()=>{if(p.dataset.mc==='exit'&&S.scores.exit!=null)return;p.querySelectorAll('button').forEach(x=>x.classList.remove('sel','right','wrong'));b.classList.add('sel');S.vals.mc[k]=b.dataset.v;save()}})});
+$$('[data-cd]').forEach(p=>{const i=p.dataset.cd;p.querySelectorAll('button').forEach(b=>{if(S.cando[i]===b.dataset.v)b.classList.add('sel');b.onclick=()=>{p.querySelectorAll('button').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');S.cando[i]=b.dataset.v;save()}})});
+
+function count(k){const el=document.querySelector(`[data-count="${k}"]`);if(!el)return;const t=S.vals[k]||'';const sent=(t.match(/[.!?]+(\s|$)/g)||[]).length;const ing=(t.match(/\b[a-z]{2,}ing\b/gi)||[]).filter(w=>!/^(thing|something|anything|nothing|everything|morning|evening|king|ring|spring|sing|bring|ceiling)$/i.test(w)).length;el.textContent=`${sent} Sätze`+(k==='hallway'?` · ${ing} mögliche -ing-Formen gefunden`:'')}
+count('compare');count('hallway');
+
+function s6(){const d=$('#s6done').checked;$('#s6btn').disabled=!d}
+s6();$('#s6btn').onclick=()=>$('#s6sol').classList.toggle('show');
+
+/* ---------- checks ---------- */
+const CHECK={
+ voc(){let n=0;$$('[data-q="voc"]').forEach(el=>{const r=judge(el.value,Q.voc[el.dataset.i][2]);mark(el,r);if(r!=='wrong')n++});return n},
+ rule(){let n=0;$$('[data-q="rule"]').forEach(el=>{const r=judge(el.value,Q.rule[el.dataset.i]);mark(el,r);if(r!=='wrong')n++});return n},
+ sophie(){let n=0;$$('[data-q="sophie"]').forEach(el=>{const r=judge(el.value,Q.sophie[el.dataset.i][2]);mark(el,r);if(r!=='wrong')n++});return n},
+ sort(){let n=0;$$('[data-q="sort"]').forEach(el=>{const i=el.dataset.i,ok=el.value===Q.sort[i][1];mark(el,ok?'right':'wrong');const f=$('#sortfb'+i);f.textContent=ok?'✓':'✗';f.className='fb '+(ok?'g':'r');if(ok)n++});return n},
+ matt(){let n=0;$$('[data-q="matt"]').forEach(el=>{const i=el.dataset.i,ok=Q.matt[i][1].includes(el.value);mark(el,ok?'right':'wrong');const f=$('#mattfb'+i);f.textContent=ok?'✓':'✗';f.className='fb '+(ok?'g':'r');if(ok)n++});return n},
+ who(){let n=0;$$('[data-who]').forEach(p=>{const i=p.dataset.who,v=S.vals.who[i];p.querySelectorAll('button').forEach(b=>{b.classList.remove('right','wrong');if(b.dataset.v===v)b.classList.add(v===WHO[i][1]?'right':'wrong')});if(v===WHO[i][1])n++});return n},
+ trap(){return mcCheck('trap')},
+ exit(){const n=mcCheck('exit');$('#exitBtn').disabled=true;return n}
+};
+function mcCheck(key){let n=0;$$(`[data-mc="${key}"]`).forEach(p=>{const i=p.dataset.i,v=S.vals.mc[key+i],c=String(Q[key][i][2]);p.querySelectorAll('button').forEach(b=>{b.classList.remove('right','wrong');if(b.dataset.v===v)b.classList.add(v===c?'right':'wrong')});if(v===c)n++});return n}
+$$('[data-check]').forEach(b=>b.onclick=()=>{const k=b.dataset.check;if(k==='exit'&&S.scores.exit!=null)return;setScore(k,CHECK[k]())});
+Object.keys(S.scores).forEach(k=>{if(CHECK[k]){CHECK[k]();showScore(k)}});
+if(S.scores.exit!=null)$('#exitBtn').disabled=true;
+
+/* ---------- flashcards ---------- */
+function fcDeck(){return S.fc.round2?S.fc.again2:VOCAB.map((_,i)=>i)}
+function fcShow(){const deck=fcDeck();const card=$('#fc');card.classList.remove('flip');
+  if(S.fc.idx>=deck.length){ if(!S.fc.round2&&S.fc.again.length){S.fc.round2=true;S.fc.again2=[...S.fc.again];S.fc.again=[];S.fc.idx=0;save();return fcShow()}
+    if(S.fc.round2&&S.fc.again.length){S.fc.again2=[...S.fc.again];S.fc.again=[];S.fc.idx=0;save();return fcShow()}
+    $('#fcEn').textContent='Fertig!';$('#fcDe').textContent='Alle Karten gelernt';$('#fcEx').textContent='';$('#fcCount').textContent='Weiter mit Aufgabe b';S.fc.done=true;save();return}
+  const v=VOCAB[deck[S.fc.idx]];$('#fcEn').textContent=v[0];$('#fcDe').textContent=v[1];$('#fcEx').textContent=v[2];
+  $('#fcCount').textContent=(S.fc.round2?'Wiederholung: ':'Karte ')+(S.fc.idx+1)+' / '+deck.length;}
+$('#fc').onclick=()=>$('#fc').classList.toggle('flip');
+$('#fcKnow').onclick=()=>{if(S.fc.done)return;S.fc.idx++;save();fcShow()};
+$('#fcAgain').onclick=()=>{if(S.fc.done)return;const d=fcDeck();S.fc.again.push(d[S.fc.idx]);S.fc.idx++;save();fcShow()};
+fcShow();
+
+/* ---------- navigation ---------- */
+function go(i){i=+i;S.st=i;S.visited=Math.max(S.visited||0,i);save();
+  $$('.station').forEach(s=>s.classList.toggle('active',+s.dataset.st===i));
+  $$('.stop').forEach((s,j)=>{s.classList.toggle('here',j===i);s.classList.toggle('done',j<i||j<=(S.visited||0)&&j!==i)});
+  if(i===6)renderResult();window.scrollTo({top:0});}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g)go(g.dataset.go)});
+function showWho(){const n=(S.vals.name||'').trim();$('#whoTop').textContent=n?n+(S.vals.klasse?' · '+S.vals.klasse:''):''}
+showWho();
+
+/* ---------- result ---------- */
+function dayCode(){const d=new Date();const w=['SUN','MON','TUE','WED','THU','FRI','SAT'][d.getDay()];return 'GERUND-'+w+'-'+String(d.getDate()).padStart(2,'0')}
+function renderResult(){
+  const s=S.scores,f=k=>s[k]!=null?`${s[k]}/${TOTAL[k]}`:'–';
+  const tot=Object.keys(TOTAL).reduce((a,k)=>a+(s[k]||0),0),max=Object.values(TOTAL).reduce((a,b)=>a+b,0);
+  const face={3:'😀',2:'🙂',1:'😕'};
+  const d=new Date();
+  $('#result').innerHTML=`<h2>${esc(S.vals.name||'Name fehlt!')}</h2>
+  <div class="res-meta">${esc(S.vals.klasse||'')} · ${d.toLocaleDateString('de-DE')} · ${d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})} · <span class="stamp">${dayCode()}</span></div>
+  <div class="res-grid">
+   <div class="res-cell"><small>Vokabeln</small><b>${f('voc')}</b></div>
+   <div class="res-cell"><small>Lena or Matt</small><b>${f('who')}</b></div>
+   <div class="res-cell"><small>Regel + Sortieren</small><b>${s.rule!=null||s.sort!=null?((s.rule||0)+(s.sort||0))+'/11':'–'}</b></div>
+   <div class="res-cell"><small>Buch 13/4 + 14/5</small><b>${s.sophie!=null||s.matt!=null?((s.sophie||0)+(s.matt||0))+'/16':'–'}</b></div>
+   <div class="res-cell"><small>gerund or to?</small><b>${f('trap')}</b></div>
+   <div class="res-cell"><small>Exit-Quiz</small><b>${f('exit')}</b></div>
+   <div class="res-cell"><small>Gesamt</small><b>${tot}/${max}</b></div>
+   <div class="res-cell"><small>Heft 14/6 · Sprechen</small><b>${S.vals.s6done?'✓':'✗'} · ${S.vals.talkdone?'✓':'✗'}</b></div>
+  </div>
+  <p style="margin:.4rem 0;font-weight:700">Partner: ${esc(S.vals.partner||'–')} &nbsp; Selbsteinschätzung: ${CANDO.map((_,i)=>face[S.cando[i]]||'–').join(' ')}</p>
+  <p style="margin:.6rem 0 .2rem;font-weight:800">My first day in the hallway (14/7b)</p>
+  <div class="res-text">${esc(S.vals.hallway||'– noch nichts geschrieben –')}</div>`;
+}
+
+/* ---------- teacher ---------- */
+$('#teacherBtn').onclick=()=>{$('#overlay').classList.add('show');$('#pin').focus()};
+$$('[data-close]').forEach(b=>b.onclick=()=>{$('#overlay').classList.remove('show')});
+$('#pinOk').onclick=()=>{if($('#pin').value.trim()==='2468'){$('#pinBox').classList.add('hidden');$('#tBox').classList.remove('hidden');$('#dayCode').textContent=dayCode()}else $('#pinErr').classList.remove('hidden')};
+$('#themeBtn').onclick=()=>{const r=document.documentElement;const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;r.dataset.theme=dark?'light':'dark'};
+
+go(S.st||0);
+</script>
+</body>
+</html>
