@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>English 8 – Unit 1 · Story: Nightmare at the mall</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--line:#00539C;--sun:#FFD662;--page:#F0F4F8;--card:#fff;--text:#1A1A1A;--muted:#5A6573;--red:#C62828;--green:#2E7D32;--soft:#E3ECF5;--bd:#CBD5E1}
+@media (prefers-color-scheme:dark){:root{--page:#12171D;--card:#1B222B;--text:#E8ECF1;--muted:#9AA4B0;--red:#EF9A9A;--green:#81C784;--soft:#22303F;--bd:#3A4654}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;background:var(--page);color:var(--text);font-size:17px;line-height:1.5;padding-bottom:calc(env(safe-area-inset-bottom,0px) + 90px)}
+header{background:var(--line);color:#fff;padding:calc(env(safe-area-inset-top,0px) + 14px) 16px 14px;position:relative}
+header h1{margin:0;font-weight:900;font-size:1.35rem;line-height:1.15}
+header p{margin:.15rem 0 0;font-weight:700;opacity:.85;font-size:.95rem}
+header i{position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--sun)}
+#tbtn{position:absolute;right:12px;top:calc(env(safe-area-inset-top,0px) + 12px);background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:8px;padding:6px 10px;font:inherit;font-weight:800;font-size:.85rem;cursor:pointer}
+nav{display:flex;gap:6px;overflow-x:auto;padding:12px 16px 4px;scrollbar-width:none}
+nav button{flex:0 0 auto;min-width:40px;height:40px;border-radius:20px;border:2px solid var(--bd);background:var(--card);color:var(--text);font:inherit;font-weight:900;cursor:pointer}
+nav button.on{background:var(--line);border-color:var(--line);color:#fff}
+nav button.done{border-color:var(--green)}
+nav button.done::after{content:" ✓";color:var(--green)}
+nav button.on.done::after{color:#fff}
+main{max-width:820px;margin:0 auto;padding:8px 16px}
+section{display:none}
+section.on{display:block}
+.card{background:var(--card);border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.08);padding:18px;margin:14px 0}
+h2{font-weight:900;font-size:1.45rem;margin:.2rem 0 .3rem;line-height:1.2}
+h3{font-weight:900;font-size:1.1rem;margin:0 0 .5rem}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin:.3rem 0 .2rem}
+.tag{display:inline-block;border-radius:999px;padding:3px 11px;font-weight:800;font-size:.85rem;background:var(--soft)}
+.tag.silent{background:#FFE9A8;color:#5A4500}
+.tag.whisper{background:#CDEBD0;color:#1B4D1F}
+.tag.book{background:#F6D3D3;color:#6B0F0F}
+@media (prefers-color-scheme:dark){.tag.silent{background:#5A4500;color:#FFE9A8}.tag.whisper{background:#1B4D1F;color:#CDEBD0}.tag.book{background:#6B0F0F;color:#F6D3D3}}
+.big{font-size:1.1rem;font-weight:800}
+.note{border-left:6px solid var(--sun);background:var(--soft);padding:10px 14px;border-radius:0 10px 10px 0;margin:10px 0}
+.stop{border-left-color:var(--red)}
+.eb{border-left-color:var(--line)}
+.eb::before{content:"✏️ Exercise Book: ";font-weight:900}
+ul.check{list-style:none;padding:0;margin:.4rem 0}
+ul.check li{padding:6px 0}
+ul.check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer;font-weight:700}
+input[type=checkbox]{width:22px;height:22px;flex:0 0 22px;margin-top:2px;accent-color:var(--line)}
+.q{padding:12px 0;border-top:1px solid var(--bd)}
+.q:first-of-type{border-top:0}
+.q .p{font-weight:800;margin-bottom:6px}
+.q .n{display:inline-block;min-width:1.6em;color:var(--line);font-weight:900}
+@media (prefers-color-scheme:dark){.q .n{color:var(--sun)}}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{display:flex;gap:10px;align-items:center;border:2px solid var(--bd);border-radius:10px;padding:8px 12px;cursor:pointer;background:var(--card);font-weight:700;text-align:left;font:inherit;color:var(--text)}
+.opt.sel{border-color:var(--line);background:var(--soft)}
+.opt.ok{border-color:var(--green)}
+.opt.bad{border-color:var(--red)}
+.inl{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+input.t,select{font:inherit;font-size:1rem;padding:7px 10px;border:2px solid var(--bd);border-radius:10px;background:var(--card);color:var(--text);min-width:120px}
+input.t:focus,select:focus{outline:none;border-color:var(--line)}
+input.t.ok,select.ok{border-color:var(--green)}
+input.t.bad,select.bad{border-color:var(--red)}
+.fb{font-weight:800;font-size:.95rem;margin-top:4px;min-height:1.2em}
+.fb.ok{color:var(--green)}.fb.bad{color:var(--red)}
+.tf{display:flex;gap:8px}
+.tf .opt{flex:0 0 auto;padding:6px 16px}
+.sample{display:none;margin-top:6px;font-size:.95rem;background:var(--soft);border-radius:8px;padding:6px 10px}
+.sample.on{display:block}
+.btn{display:inline-block;font:inherit;font-weight:900;font-size:1rem;padding:11px 18px;border:0;border-radius:10px;background:var(--line);color:#fff;cursor:pointer;margin:6px 6px 0 0}
+.btn.sec{background:var(--soft);color:var(--text)}
+.btn.sun{background:var(--sun);color:#1A1A1A}
+.btn:disabled{opacity:.5;cursor:default}
+.score{font-weight:900;font-size:1.1rem;margin-top:8px}
+.order-pool,.order-done{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+.order-done .opt{cursor:default}
+.order-done .opt b{color:var(--line);min-width:1.4em}
+.drop{min-height:44px;border:2px dashed var(--bd);border-radius:10px;padding:6px}
+.timer{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--soft);border-radius:12px;padding:10px 14px;margin:10px 0}
+.timer .clock{font-size:1.8rem;font-weight:900;font-variant-numeric:tabular-nums;min-width:4.2ch}
+.timer.end{background:#FFE0E0}
+@media (prefers-color-scheme:dark){.timer.end{background:#5A1F1F}}
+.thumbs{display:flex;gap:6px}
+.thumbs .opt{padding:6px 14px;font-size:1.2rem}
+.rate-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 0;border-top:1px solid var(--bd)}
+.rate-row:first-child{border-top:0}
+.ab{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:640px){.ab{grid-template-columns:1fr}}
+.ab .card{margin:0}
+.ab .card.a{border-top:6px solid var(--line)}
+.ab .card.b{border-top:6px solid var(--sun)}
+.sl{display:grid;grid-template-columns:2.2em 1fr 2em;align-items:center;gap:8px;margin:4px 0}
+.sl input{width:100%;accent-color:var(--line)}
+svg.curve{width:100%;height:auto;background:var(--soft);border-radius:12px;margin-top:8px}
+.cando .rate-row span{font-weight:700}
+.sum{width:100%;border-collapse:collapse;margin-top:8px}
+.sum td{padding:7px 6px;border-top:1px solid var(--bd);font-weight:700}
+.sum td:last-child{text-align:right;font-weight:900}
+.navbar{position:fixed;left:0;right:0;bottom:0;background:var(--card);box-shadow:0 -2px 12px rgba(0,0,0,.1);padding:10px 16px calc(env(safe-area-inset-bottom,0px) + 10px);display:flex;justify-content:space-between;gap:10px;z-index:5}
+.navbar .btn{margin:0;flex:1;max-width:260px}
+.hidden{display:none!important}
+/* teacher overlay */
+#ov{position:fixed;inset:0;background:var(--page);z-index:20;overflow:auto;display:none}
+#ov.on{display:block}
+#ov header{position:sticky;top:0;z-index:2}
+#ov .tabs{display:flex;gap:6px;padding:12px 16px 0;flex-wrap:wrap}
+#ov .tabs button{font:inherit;font-weight:900;border:2px solid var(--bd);background:var(--card);color:var(--text);border-radius:10px;padding:8px 14px;cursor:pointer}
+#ov .tabs button.on{background:var(--line);color:#fff;border-color:var(--line)}
+table.plan{width:100%;border-collapse:collapse;font-size:.95rem}
+table.plan th,table.plan td{border-top:1px solid var(--bd);padding:7px 6px;text-align:left;vertical-align:top}
+table.plan th{font-weight:900}
+.sol li{margin:3px 0}
+#pres{position:fixed;inset:0;background:var(--line);color:#fff;z-index:30;display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+#pres.on{display:flex}
+#pres .ph{font-size:clamp(1.4rem,3.5vw,2.6rem);font-weight:900;opacity:.9}
+#pres .ti{font-size:clamp(2rem,6vw,4.6rem);font-weight:900;line-height:1.1;margin:.2em 0}
+#pres .mode{font-size:clamp(1.3rem,3vw,2.2rem);font-weight:900;background:var(--sun);color:#1A1A1A;border-radius:999px;padding:.2em .9em;margin:.4em 0}
+#pres .clk{font-size:clamp(4rem,16vw,12rem);font-weight:900;font-variant-numeric:tabular-nums;line-height:1}
+#pres .ctl{position:absolute;bottom:20px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+#pres .ctl button{font:inherit;font-weight:900;font-size:1rem;border:0;border-radius:10px;padding:10px 16px;cursor:pointer;background:rgba(255,255,255,.18);color:#fff}
+#pres i.bar{position:absolute;left:0;right:0;top:0;height:10px;background:var(--sun)}
+</style></head>
+<body>
+<header>
+  <h1>Nightmare at the mall!</h1>
+  <p>English 8 · Unit 1 · Story · SB S. 19–21</p>
+  <button id="tbtn" type="button">🔒 Lehrkraft</button>
+  <i></i>
+</header>
+<nav id="nav"></nav>
+<main id="main"></main>
+<div class="navbar"><button class="btn sec" id="prev" type="button">← Zurück</button><button class="btn" id="next" type="button">Weiter →</button></div>
+
+<div id="ov">
+  <header><h1>Lehrkraft-Bereich</h1><p>Vertretungsstunde · Story „Nightmare at the mall“</p><button id="ovx" type="button" style="position:absolute;right:12px;top:12px;background:rgba(255,255,255,.15);color:#fff;border:0;border-radius:8px;padding:6px 12px;font:inherit;font-weight:800;cursor:pointer">✕ Schließen</button><i></i></header>
+  <div class="tabs"><button data-t="t1" class="on" type="button">Ablauf</button><button data-t="t2" type="button">Lösungen</button><button data-t="t3" type="button">Präsentation</button></div>
+  <main>
+    <div id="t1" class="tp"></div>
+    <div id="t2" class="tp hidden"></div>
+    <div id="t3" class="tp hidden"><div class="card"><h3>Präsentationsmodus für den Beamer</h3><p>Zeigt groß die aktuelle Phase, die Arbeitsform (still / flüstern) und einen Timer. Mit den Pfeilen unten wechselst du die Phase. <b>Leertaste</b> = Timer Start/Pause, <b>←/→</b> = Phase wechseln, <b>Esc</b> = beenden.</p><button class="btn" id="presgo" type="button">▶ Präsentation starten</button></div></div>
+  </main>
+</div>
+
+<div id="pres"><i class="bar"></i>
+  <div class="ph" id="pph"></div><div class="ti" id="pti"></div><div class="mode" id="pmo"></div><div class="clk" id="pclk">00:00</div>
+  <div class="ctl"><button id="pp" type="button">← Phase</button><button id="pst" type="button">▶ Start</button><button id="prs" type="button">↺ Reset</button><button id="pn" type="button">Phase →</button><button id="px" type="button">✕ Ende</button></div>
+</div>
+
+<script>
+/* ============ DATA ============ */
+const PIN='8121';
+const STORE='e8-u1-story-mall-v1';
+const STEPS=[
+ {id:'s0',nav:'Start',title:'Get ready',min:5,mode:'silent',modeTxt:'🔇 Still – Einzelarbeit'},
+ {id:'s1',nav:'1',title:'Before you listen',min:5,mode:'silent',modeTxt:'🔇 Still – Einzelarbeit'},
+ {id:'s2',nav:'2',title:'Listening 1 – Parts A–C',min:15,mode:'silent',modeTxt:'🔇 Still – Kopfhörer · Buch ZU'},
+ {id:'s3',nav:'3',title:'Listening 2 – Parts D–F',min:12,mode:'silent',modeTxt:'🔇 Still – Kopfhörer · Buch ZU'},
+ {id:'s4',nav:'4',title:'Listening 3 – Parts G–I',min:13,mode:'silent',modeTxt:'🔇 Still – Kopfhörer · Buch ZU'},
+ {id:'s5',nav:'5',title:'Read the story',min:8,mode:'silent',modeTxt:'🔇 Still – Buch AUF'},
+ {id:'s6',nav:'6',title:'Believe it or not?',min:8,mode:'mixed',modeTxt:'🔇 5 Min. allein → 🗣️ 3 Min. flüstern'},
+ {id:'s7',nav:'7',title:'Expert swap: A & B',min:14,mode:'mixed',modeTxt:'🔇 9 Min. allein → 🗣️ 2 × 2 Min. flüstern'},
+ {id:'s8',nav:'Ende',title:'Check out',min:5,mode:'silent',modeTxt:'🔇 Still – Einzelarbeit'}
+];
+/* Listening tasks */
+const L1A=[ // first listening: gist (Parts A–C)
+ {t:'mc',p:'Where are Lena and Kaitlyn going?',o:['to a baseball stadium in Pittsburgh','to a big shopping mall on the other side of Pittsburgh','to their new school'],a:1},
+ {t:'mc',p:'Who is driving them there?',o:['Lena’s mom','Kaitlyn’s older brother','Kaitlyn’s mom'],a:2},
+ {t:'mc',p:'Why are there so many people at the mall that day?',o:['A famous sports star is opening a new store.','There is a big sale in all the stores.','A pop band is giving a free concert.'],a:0}
+];
+const L1B=[ // second listening: details
+ {t:'gap',p:'Lena has been waiting outside the city for',post:'weeks.',a:['3','three']},
+ {t:'mc',p:'What did Lena’s mom tell her to do if she loses her friends?',o:['go to the information desk','call her','wait at the car'],a:1},
+ {t:'mc',p:'Who is Jacob?',o:['Kaitlyn’s older brother','Kaitlyn’s cousin','a friend from school'],a:0},
+ {t:'gap',p:'Jacob says the baseball player might sign a',post:'for Lena.',a:['t-shirt','tshirt','t shirt','shirt']},
+ {t:'gap2',p:'If they lose each other, the girls want to meet at the',mid:'at',post:'o’clock.',a:[['benches','bench'],['5','five']]},
+ {t:'gap',p:'Lena loses her friends after only',post:'minutes.',a:['5','five']},
+ {t:'gap',p:'The protesters are shouting against child',post:'.',a:['labor','labour']},
+ {t:'multi',p:'Part C: Tick all the things that happen.',o:['Lena feels sick and dizzy.','The baseball player’s bodyguards help him to get away.','The protesters are a group of older people.','Lena falls and hurts her leg.','Someone suddenly takes hold of Lena.'],a:[0,1,4]}
+];
+const L2TF=[
+ {s:'A man thinks Lena is one of the troublemakers.',a:true},
+ {s:'The police officer is friendly and tells Lena not to worry.',a:false,c:'He warns her that she will be in big trouble if she doesn’t find good answers quickly.'},
+ {s:'Lena is afraid she might have to spend a night in prison.',a:true},
+ {s:'The person who helps Lena is Kaitlyn’s brother Jacob.',a:false,c:'It is Matt – Lena knows him from a weekend in New York.'},
+ {s:'Lena is told to act as if she can’t speak English.',a:true},
+ {s:'Matt has come to the mall to see Wayne Larson.',a:false,c:'He has come to support the protesters, who are his friends from his new school.'},
+ {s:'Lena is happy to stay with Matt.',a:false,c:'She remembers that he didn’t want to meet her but wanted to meet Sophie, so she hurries away from him.'}
+];
+const WHO=['Lena','Matt','the police officer'];
+const L2WHO=[
+ {p:'warns Lena that she is in big trouble',a:2},
+ {p:'says that Lena isn’t from here',a:1},
+ {p:'explains that he is rescuing Lena',a:1},
+ {p:'talks to the police officer so that Lena can go',a:1},
+ {p:'asks why Matt is really at the mall',a:0}
+];
+const L3ORDER=[ // correct order
+ 'Lena goes up and down the escalators but can’t find her friends.',
+ 'She decides to call her mom, although she feels silly about it.',
+ 'She finds out that her phone isn’t in her bag.',
+ 'She tries very hard not to cry.',
+ 'A boy says he is the best friend of Kaitlyn’s brother.',
+ 'The boy offers to drive Lena home – and she agrees.'
+];
+const L3B=[
+ {t:'gap',p:'The boy’s name is',post:'.',a:['nick']}
+];
+const L3C=[
+ {t:'mc',p:'Who has saved Lena for the second time that day?',o:['Nick','Jacob','Matt','Kaitlyn'],a:2},
+ {t:'mc',p:'How does Lena feel about Matt at the end?',o:['She is still angry because he likes Sophie more – but she is thankful.','She never wants to see him again.','She has completely forgotten about Sophie.'],a:0},
+ {t:'mc',p:'What does Lena suggest at the end?',o:['They should call the police.','They should have a coffee together.','They should look for Wayne Larson.'],a:1}
+];
+const VOC=[
+ {e:'suburbs',g:'Vororte',l:4},{e:'cheer',g:'Jubel',l:27},{e:'dizzy',g:'schwindelig',l:36},{e:'bodyguards',g:'Leibwächter',l:42},
+ {e:'to arrest',g:'verhaften',l:56},{e:'to rescue',g:'retten',l:73},{e:'escalator',g:'Rolltreppe',l:92},{e:'to forgive',g:'verzeihen',l:111}
+];
+const CANDO=['I can understand the main points of a story when I listen to it.','I can find details (numbers, names, places) when I listen.','I can explain what makes a story exciting or (un)believable.'];
+
+/* ============ STATE ============ */
+let S={};try{S=JSON.parse(localStorage.getItem(STORE))||{}}catch(e){S={}}
+S.done=S.done||{};S.score=S.score||{};S.cando=S.cando||{};S.rate=S.rate||{};S.curve=S.curve||{};S.step=S.step||0;
+const save=()=>{try{localStorage.setItem(STORE,JSON.stringify(S))}catch(e){}};
+
+/* ============ HELPERS ============ */
+const $=s=>document.querySelector(s);
+const el=(tag,attrs={},html='')=>{const e=document.createElement(tag);for(const k in attrs){if(k==='class')e.className=attrs[k];else e.setAttribute(k,attrs[k])}if(html)e.innerHTML=html;return e};
+const norm=s=>s.toLowerCase().replace(/[’'`´]/g,'').replace(/[-–]/g,' ').replace(/[.,!?;:"]/g,'').replace(/\s+/g,' ').trim();
+function lev(a,b){const m=a.length,n=b.length;const d=Array.from({length:m+1},(_,i)=>[i,...Array(n).fill(0)]);for(let j=1;j<=n;j++)d[0][j]=j;for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[m][n]}
+function match(input,accepts){const x=norm(input);if(!x)return 'empty';for(const a of accepts){const y=norm(a);if(x===y)return 'ok';if(y.length>=5&&lev(x,y)<=1)return 'typo'}return 'no'}
+function shuffleIdx(n,seed){const a=[...Array(n).keys()];let s=seed;for(let i=n-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* timers */
+function timerBox(min,label){
+  const w=el('div',{class:'timer'});const c=el('span',{class:'clock'},fmt(min*60));const b=el('button',{class:'btn',type:'button'},'▶ Timer starten');const r=el('button',{class:'btn sec',type:'button'},'↺');
+  const lab=el('span',{style:'font-weight:800'},label||'');
+  w.append(c,b,r,lab);let left=min*60,iv=null;
+  const tick=()=>{left--;c.textContent=fmt(Math.max(left,0));if(left<=0){clearInterval(iv);iv=null;w.classList.add('end');b.textContent='⏰ Zeit ist um';beep()}};
+  b.onclick=()=>{if(iv){clearInterval(iv);iv=null;b.textContent='▶ Weiter'}else if(left>0){iv=setInterval(tick,1000);b.textContent='⏸ Pause'}};
+  r.onclick=()=>{clearInterval(iv);iv=null;left=min*60;c.textContent=fmt(left);w.classList.remove('end');b.textContent='▶ Timer starten'};
+  return w}
+function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}
+function beep(){try{const a=new (window.AudioContext||window.webkitAudioContext)();const o=a.createOscillator();const g=a.createGain();o.connect(g);g.connect(a.destination);o.frequency.value=880;g.gain.value=.08;o.start();setTimeout(()=>{o.stop();a.close()},400)}catch(e){}}
+
+/* ============ TASK RENDERERS ============ */
+// returns {node, check():{right,total}}
+function renderQ(q,num,key){
+  const w=el('div',{class:'q'});const p=el('div',{class:'p'},`<span class="n">${num}</span> `);w.append(p);const fb=el('div',{class:'fb'});
+  let check;
+  if(q.t==='mc'||q.t==='multi'){
+    p.innerHTML+=q.p+(q.t==='multi'?' <span style="color:var(--muted);font-weight:700">(mehrere richtig)</span>':'');
+    const box=el('div',{class:'opts'});const sel=new Set();
+    q.o.forEach((o,i)=>{const b=el('button',{class:'opt',type:'button'},`<span>${q.t==='multi'?'☐':'○'}</span><span>${o}</span>`);
+      b.onclick=()=>{if(q.t==='mc'){sel.clear();box.querySelectorAll('.opt').forEach(x=>{x.classList.remove('sel','ok','bad');x.firstChild.textContent='○'})}
+        if(sel.has(i)){sel.delete(i);b.classList.remove('sel');b.firstChild.textContent=q.t==='multi'?'☐':'○'}else{sel.add(i);b.classList.add('sel');b.firstChild.textContent=q.t==='multi'?'☑':'●'}
+        box.querySelectorAll('.opt').forEach(x=>x.classList.remove('ok','bad'));fb.textContent='';fb.className='fb'};
+      box.append(b)});
+    w.append(box);
+    check=()=>{const bs=box.querySelectorAll('.opt');let ok;
+      if(q.t==='mc'){ok=sel.has(q.a)&&sel.size===1;bs.forEach((b,i)=>{b.classList.remove('ok','bad');if(sel.has(i))b.classList.add(i===q.a?'ok':'bad')})}
+      else{const A=new Set(q.a);ok=sel.size===A.size&&[...sel].every(i=>A.has(i));bs.forEach((b,i)=>{b.classList.remove('ok','bad');if(sel.has(i))b.classList.add(A.has(i)?'ok':'bad')});
+        if(!ok){const miss=[...A].filter(i=>!sel.has(i)).length;fb.textContent=miss?`✘ Es fehlt noch ${miss===1?'eine richtige Aussage':miss+' richtige Aussagen'}`:'✘ Mindestens eine Aussage stimmt nicht.';fb.className='fb bad';return{right:0,total:1}}}
+      fb.textContent=ok?'✔ Richtig!':(sel.size?'✘ Noch nicht – hör noch einmal genau hin.':'Wähle eine Antwort.');fb.className='fb '+(ok?'ok':'bad');return{right:ok?1:0,total:1}};
+  }else if(q.t==='gap'||q.t==='gap2'){
+    const line=el('div',{class:'inl'});p.remove();w.append(line);
+    line.append(el('span',{class:'n'},String(num)),el('span',{},q.p));
+    const i1=el('input',{class:'t',autocomplete:'off',autocapitalize:'off',spellcheck:'false'});line.append(i1);let i2=null;
+    if(q.t==='gap2'){line.append(el('span',{},q.mid));i2=el('input',{class:'t',autocomplete:'off',style:'min-width:70px;width:90px'});line.append(i2)}
+    line.append(el('span',{},q.post));
+    const ins=q.t==='gap2'?[i1,i2]:[i1];const acc=q.t==='gap2'?q.a:[q.a];
+    ins.forEach(x=>x.oninput=()=>{x.classList.remove('ok','bad');fb.textContent=''});
+    check=()=>{let all=true,typo=false;ins.forEach((x,k)=>{const r=match(x.value,acc[k]);x.classList.remove('ok','bad');if(r==='ok'||r==='typo'){x.classList.add('ok');if(r==='typo')typo=true}else{x.classList.add('bad');all=false}});
+      fb.textContent=all?(typo?'✔ Richtig! (Achte noch auf die Schreibung.)':'✔ Richtig!'):'✘ Noch nicht – hör noch einmal genau hin.';fb.className='fb '+(all?'ok':'bad');return{right:all?1:0,total:1}};
+  }
+  w.append(fb);return{node:w,check};
+}
+function block(qs,key,startNum,title,hint){
+  const c=el('div',{class:'card'});if(title)c.append(el('h3',{},title));if(hint)c.append(el('div',{class:'note'},hint));
+  const items=qs.map((q,i)=>renderQ(q,startNum+i,key+i));items.forEach(it=>c.append(it.node));
+  const b=el('button',{class:'btn',type:'button'},'Prüfen');const sc=el('div',{class:'score'});c.append(b,sc);
+  b.onclick=()=>{let r=0,t=0;items.forEach(it=>{const x=it.check();r+=x.right;t+=x.total});
+    if(S.score[key]==null){S.score[key]={first:r,total:t,best:r}}else{S.score[key].best=Math.max(S.score[key].best,r)}save();
+    sc.textContent=`${r} von ${t} richtig`+(r<t?' – verbessere die roten Antworten und prüfe noch einmal.':' 🎉');};
+  return c;
+}
+function tfBlock(){
+  const c=el('div',{class:'card'});c.append(el('h3',{},'A  True or false?'));
+  c.append(el('div',{class:'note eb'},'Schreibe zu jeder <b>falschen</b> Aussage eine korrigierte Aussage auf Englisch ins Heft (z. B. <i>No 2: The police officer …</i>). Danach kannst du deine Korrektur mit dem Lösungsvorschlag vergleichen.'));
+  const items=L2TF.map((q,i)=>{const w=el('div',{class:'q'});w.append(el('div',{class:'p'},`<span class="n">${i+1}</span> ${q.s}`));
+    const row=el('div',{class:'tf'});let v=null;const bT=el('button',{class:'opt',type:'button'},'true');const bF=el('button',{class:'opt',type:'button'},'false');row.append(bT,bF);w.append(row);
+    const fb=el('div',{class:'fb'});const smp=el('div',{class:'sample'},q.c?'<b>Lösungsvorschlag:</b> '+q.c:'');w.append(fb,smp);
+    [bT,bF].forEach((b,k)=>b.onclick=()=>{v=k===0;bT.classList.toggle('sel',v===true);bF.classList.toggle('sel',v===false);bT.classList.remove('ok','bad');bF.classList.remove('ok','bad');fb.textContent='';smp.classList.remove('on')});
+    c.append(w);
+    return{check:()=>{const ok=v===q.a;const b=v?bT:bF;bT.classList.remove('ok','bad');bF.classList.remove('ok','bad');if(v!==null)b.classList.add(ok?'ok':'bad');
+      fb.textContent=v===null?'Wähle true oder false.':ok?(q.a?'✔ Richtig!':'✔ Richtig – die Aussage ist falsch. Hast du sie im Heft korrigiert?'):'✘ Noch nicht.';fb.className='fb '+(ok?'ok':'bad');if(ok&&!q.a)smp.classList.add('on');return ok?1:0}}});
+  const b=el('button',{class:'btn',type:'button'},'Prüfen');const sc=el('div',{class:'score'});c.append(b,sc);
+  b.onclick=()=>{const r=items.reduce((s,it)=>s+it.check(),0);const key='L2tf';if(S.score[key]==null)S.score[key]={first:r,total:items.length,best:r};else S.score[key].best=Math.max(S.score[key].best,r);save();sc.textContent=`${r} von ${items.length} richtig`+(r<items.length?' – verbessere und prüfe noch einmal.':' 🎉')};
+  return c;
+}
+function whoBlock(){
+  const c=el('div',{class:'card'});c.append(el('h3',{},'B  Who does what?'));c.append(el('p',{},'Wähle die passende Person.'));
+  const items=L2WHO.map((q,i)=>{const w=el('div',{class:'q inl'});w.append(el('span',{class:'n'},String(i+1)));const s=el('select',{});s.append(el('option',{value:''},'– who? –'));WHO.forEach((x,k)=>s.append(el('option',{value:k},x)));w.append(s,el('span',{style:'font-weight:700'},q.p));const fb=el('span',{class:'fb'});w.append(fb);s.onchange=()=>{s.classList.remove('ok','bad');fb.textContent=''};c.append(w);
+    return{check:()=>{const ok=s.value!==''&&+s.value===q.a;s.classList.remove('ok','bad');s.classList.add(ok?'ok':'bad');fb.textContent=ok?'✔':'✘';fb.className='fb '+(ok?'ok':'bad');return ok?1:0}}});
+  const b=el('button',{class:'btn',type:'button'},'Prüfen');const sc=el('div',{class:'score'});c.append(b,sc);
+  b.onclick=()=>{const r=items.reduce((s,it)=>s+it.check(),0);const key='L2who';if(S.score[key]==null)S.score[key]={first:r,total:items.length,best:r};else S.score[key].best=Math.max(S.score[key].best,r);save();sc.textContent=`${r} von ${items.length} richtig`+(r<items.length?' – verbessere und prüfe noch einmal.':' 🎉')};
+  return c;
+}
+function orderBlock(){
+  const c=el('div',{class:'card'});c.append(el('h3',{},'A  Put the events in the right order'));
+  c.append(el('p',{},'Tippe die Ereignisse in der richtigen Reihenfolge an. Falsch angetippt? Tippe es oben noch einmal an, dann geht es zurück.'));
+  const done=el('div',{class:'order-done drop'});const pool=el('div',{class:'order-pool'});c.append(el('div',{style:'font-weight:900;margin-top:6px'},'Deine Reihenfolge:'),done,el('div',{style:'font-weight:900;margin-top:10px'},'Ereignisse:'),pool);
+  const mix=shuffleIdx(L3ORDER.length,7);let picked=[];
+  const draw=()=>{done.innerHTML='';pool.innerHTML='';picked.forEach((i,k)=>{const b=el('button',{class:'opt',type:'button'},`<b>${k+1}.</b><span>${L3ORDER[i]}</span>`);b.style.cursor='pointer';b.onclick=()=>{picked.splice(k,1);fb.textContent='';draw()};done.append(b)});
+    mix.filter(i=>!picked.includes(i)).forEach(i=>{const b=el('button',{class:'opt',type:'button'},`<span>➕</span><span>${L3ORDER[i]}</span>`);b.onclick=()=>{picked.push(i);fb.textContent='';draw()};pool.append(b)})};
+  const fb=el('div',{class:'fb'});const b=el('button',{class:'btn',type:'button'},'Prüfen');c.append(b,fb);draw();
+  b.onclick=()=>{if(picked.length<L3ORDER.length){fb.textContent='Ordne zuerst alle Ereignisse.';fb.className='fb bad';return}
+    let r=0;done.querySelectorAll('.opt').forEach((x,k)=>{const ok=picked[k]===k;x.classList.remove('ok','bad');x.classList.add(ok?'ok':'bad');if(ok)r++});
+    const key='L3order';if(S.score[key]==null)S.score[key]={first:r,total:6,best:r};else S.score[key].best=Math.max(S.score[key].best,r);save();
+    fb.textContent=r===6?'✔ 6 von 6 – perfekt!':`${r} von 6 an der richtigen Stelle. Tippe die roten an und ordne neu.`;fb.className='fb '+(r===6?'ok':'bad')};
+  return c;
+}
+function vocBlock(){
+  const c=el('div',{class:'card'});c.append(el('h3',{},'B  Words from the story'));
+  c.append(el('p',{},'Ordne jedem Wort die deutsche Bedeutung zu.'));
+  c.append(el('div',{class:'note eb'},'Suche jedes Wort in der Story und notiere die <b>Zeilennummer</b>: <i>suburbs – l. …</i>'));
+  const gs=shuffleIdx(VOC.length,11).map(i=>VOC[i].g);
+  const items=VOC.map((v,i)=>{const w=el('div',{class:'q inl'});w.append(el('span',{class:'n'},String(i+1)),el('span',{style:'font-weight:900;min-width:7.5em'},v.e));const s=el('select',{});s.append(el('option',{value:''},'– Deutsch –'));gs.forEach(g=>s.append(el('option',{value:g},g)));const fb=el('span',{class:'fb'});w.append(s,fb);s.onchange=()=>{s.classList.remove('ok','bad');fb.textContent=''};c.append(w);
+    return{check:()=>{const ok=s.value===v.g;s.classList.remove('ok','bad');s.classList.add(ok?'ok':'bad');fb.textContent=ok?'✔':'✘';fb.className='fb '+(ok?'ok':'bad');return ok?1:0}}});
+  const b=el('button',{class:'btn',type:'button'},'Prüfen');const sc=el('div',{class:'score'});const lines=el('button',{class:'btn sec',type:'button'},'Zeilennummern vergleichen');const ls=el('div',{class:'sample'},VOC.map(v=>`${v.e} – l. ${v.l}`).join(' · '));c.append(b,lines,sc,ls);
+  lines.onclick=()=>ls.classList.toggle('on');
+  b.onclick=()=>{const r=items.reduce((s,it)=>s+it.check(),0);const key='voc';if(S.score[key]==null)S.score[key]={first:r,total:items.length,best:r};else S.score[key].best=Math.max(S.score[key].best,r);save();sc.textContent=`${r} von ${items.length} richtig`};
+  return c;
+}
+function checklist(id,items){const ul=el('ul',{class:'check'});items.forEach((t,i)=>{const k=id+'_'+i;const li=el('li');const lab=el('label');const cb=el('input',{type:'checkbox'});cb.checked=!!S.done[k];cb.onchange=()=>{S.done[k]=cb.checked;save()};lab.append(cb,el('span',{},t));li.append(lab);ul.append(li)});return ul}
+
+/* ============ STEPS ============ */
+function head(st){const f=document.createDocumentFragment();const c=el('div',{class:'card'});
+  c.append(el('h2',{},st.title));const m=el('div',{class:'meta'});m.append(el('span',{class:'tag'},`⏱ ${st.min} Min.`));
+  m.append(el('span',{class:'tag '+(st.mode==='silent'?'silent':'whisper')},st.modeTxt));c.append(m);f.append(c);return{f,c}}
+
+const BUILD={
+s0(sec){const {f,c}=head(STEPS[0]);
+ c.append(el('p',{class:'big'},'Heute arbeitest du allein mit dieser Website. Sie führt dich Schritt für Schritt durch die Doppelstunde.'));
+ c.append(el('div',{class:'note stop'},'<b>📕 Das Buch bleibt bis Schritt 5 ZU!</b> Bei Schritt 2–4 trainierst du Hörverstehen. Wer mitliest, trainiert nichts.'));
+ c.append(el('h3',{},'Check: Hast du alles?'));
+ c.append(checklist('s0',['🎧 Kopfhörer sind eingesteckt und funktionieren.','🔊 Ich habe die Audios im ByCS-Kurs geöffnet (Story Teil A–I).','✏️ Mein Exercise Book liegt offen da. Überschrift: <i>Nightmare at the mall – SB p. 19–21</i> + Datum.','👥 Ich weiß, ob ich <b>Partner A</b> (links) oder <b>Partner B</b> (rechts) bin.']));
+ c.append(el('div',{class:'note'},'<b>So funktioniert’s:</b> 🔇 = absolute Ruhe, jeder für sich. 🗣️ = du darfst mit deinem Sitznachbarn <b>flüstern</b> – aber nur dann und nur so lange der Timer läuft.<br>Am Ende machst du einen <b>Screenshot</b> deiner Ergebnisübersicht und lädst ihn im ByCS-Kurs hoch.'));
+ sec.append(f)},
+s1(sec){const {f,c}=head(STEPS[1]);
+ c.append(el('p',{class:'big'},'The story you are going to hear starts in a normal way – but then things get very dramatic. Think about films or stories you know.'));
+ c.append(el('div',{class:'note eb'},'Schreibe 3–4 Sätze: Welcher Film oder welche Geschichte wirkte erst realistisch – und an welcher Stelle wurde es unglaubwürdig?'));
+ const k=el('div',{class:'card',style:'box-shadow:none;background:var(--soft);margin:8px 0'});
+ k.innerHTML='<h3>Sentence starters</h3><ul style="margin:0;padding-left:1.2em"><li>I once watched / read <i>…</i></li><li>At the beginning, everything seemed realistic because <i>…</i></li><li>But then <i>…</i> happened, and I thought: “No way!”</li><li>It wasn’t believable because the character / the situation <i>…</i></li></ul><p style="margin:.6rem 0 0"><b>Useful words:</b> a coincidence (Zufall) · exaggerated (übertrieben) · unrealistic · to (not) fit the character</p>';
+ c.append(k,timerBox(5,'Schreibzeit'));c.append(checklist('s1',['Ich habe 3–4 Sätze ins Heft geschrieben.']));sec.append(f)},
+s2(sec){const {f,c}=head(STEPS[2]);
+ c.append(el('div',{class:'note stop'},'<b>📕 Buch ZU.</b> Lies die Fragen zuerst durch – dann weißt du, worauf du achten musst.'));
+ c.append(el('p',{},'<b>Hör dir Teil A, B und C an</b> (3 Audios). <b>1. Durchgang:</b> Beantworte nur die Fragen 1–3. <b>2. Durchgang:</b> Beantworte die Fragen 4–11. Du darfst das Audio anhalten, aber nicht öfter als zweimal komplett hören.'));
+ sec.append(f);sec.append(block(L1A,'L1a',1,'1st listening – What’s it about?'));sec.append(block(L1B,'L1b',4,'2nd listening – Details','Schreibe kurze Antworten. Kleine Rechtschreibfehler sind okay.'))},
+s3(sec){const {f,c}=head(STEPS[3]);
+ c.append(el('div',{class:'note stop'},'<b>📕 Buch ZU.</b> Lies zuerst die Aussagen in A und B.'));
+ c.append(el('p',{},'<b>Hör dir Teil D, E und F an</b> (3 Audios), höchstens zweimal. Bearbeite dann A und B.'));
+ sec.append(f);sec.append(tfBlock());sec.append(whoBlock())},
+s4(sec){const {f,c}=head(STEPS[4]);
+ c.append(el('div',{class:'note stop'},'<b>📕 Buch ZU.</b> Hör dir jetzt <b>nur Teil G und H</b> an – noch <b>nicht</b> Teil I!'));
+ sec.append(f);sec.append(orderBlock());sec.append(block(L3B,'L3b',1,'B  A name'));
+ const st=el('div',{class:'card'});st.innerHTML='<h3>C  🛑 Stop and predict!</h3>';
+ st.append(el('div',{class:'note eb'},'Was passiert als Nächstes? Schreibe 3–4 Sätze auf Englisch: <i>I think Lena …</i>'));
+ st.append(el('div',{class:'note'},'💡 Denk nach: Kennt Lena den Jungen wirklich? Was würdest <b>du</b> an ihrer Stelle tun?'));
+ st.append(timerBox(3,'Schreibzeit'));st.append(checklist('s4p',['Meine Vorhersage steht im Heft.']));
+ const go=el('button',{class:'btn sun',type:'button'},'Vorhersage fertig → weiter zu Teil I');st.append(go);sec.append(st);
+ const last=block(L3C,'L3c',1,'D  Now listen to Part I','Hör dir jetzt Teil I an. Markiere danach deine Vorhersage im Heft: ✔ = getroffen, ✘ = anders.');last.classList.add('hidden');sec.append(last);
+ if(S.done.s4p_0)last.classList.remove('hidden');
+ go.onclick=()=>{if(!S.done.s4p_0){alertBox(st,'Schreib zuerst deine Vorhersage ins Heft und hake sie ab.');return}last.classList.remove('hidden');last.scrollIntoView({behavior:'smooth'})}},
+s5(sec){const {f,c}=head(STEPS[5]);
+ c.append(el('div',{class:'note'},'<b>📖 Jetzt Buch AUF: SB S. 19–20.</b> Lies die ganze Story still. Wenn du willst, hör dabei noch einmal mit.'));
+ c.append(timerBox(5,'Lesezeit'));c.append(checklist('s5',['Ich habe die ganze Story gelesen.']));sec.append(f);sec.append(vocBlock())},
+s6(sec){const {f,c}=head(STEPS[6]);
+ c.append(el('div',{class:'note'},'<b>📖 SB S. 21, Nr. 3</b> – lies dort die 6 Ereignisse aus der Story.'));
+ c.append(el('h3',{},'Schritt 1 🔇 allein (5 Min.): Glaubwürdig oder nicht?'));
+ const r=el('div',{});for(let i=1;i<=6;i++){const row=el('div',{class:'rate-row'});row.append(el('span',{style:'font-weight:900'},`Ereignis ${i}`));const t=el('div',{class:'thumbs'});
+   const up=el('button',{class:'opt',type:'button'},'👍');const dn=el('button',{class:'opt',type:'button'},'👎');
+   const paint=()=>{up.classList.toggle('sel',S.rate[i]==='up');dn.classList.toggle('sel',S.rate[i]==='down')};
+   up.onclick=()=>{S.rate[i]='up';save();paint()};dn.onclick=()=>{S.rate[i]='down';save();paint()};paint();t.append(up,dn);row.append(t);r.append(row)}
+ c.append(r);
+ c.append(el('div',{class:'note eb'},'Wähle <b>zwei</b> Ereignisse und begründe deine Meinung in je 1–2 Sätzen.<br><i>I think event … is (not) believable because … · In real life, … · This could (never) happen because …</i>'));
+ c.append(timerBox(5,'allein'));
+ c.append(el('h3',{style:'margin-top:14px'},'Schritt 2 🗣️ flüstern (3 Min.): Partner-Check'));
+ c.append(el('div',{class:'note'},'Vergleicht eure 👍/👎. Findet <b>ein</b> Ereignis, bei dem ihr verschieden entschieden habt, und erklärt euch eure Gründe.'));
+ c.append(el('div',{class:'note eb'},'Notiere das Argument deines Partners: <i>My partner thinks event … is … because …</i>'));
+ c.append(timerBox(3,'flüstern'));c.append(checklist('s6',['Zwei Begründungen stehen im Heft.','Das Argument meines Partners steht im Heft.']));sec.append(f)},
+s7(sec){const {f,c}=head(STEPS[7]);
+ c.append(el('div',{class:'note'},'<b>📖 SB S. 21, Nr. 2</b> – heute arbeitet nicht die Gruppe, sondern ihr teilt die Aufgabe als Experten auf.'));
+ c.append(el('h3',{},'Alle zuerst (1 Min.): Nr. 2, Aufgabe 1'));c.append(el('div',{class:'note eb'},'Erkläre in <b>einem</b> Satz, warum die Story diesen Titel hat.'));
+ const ab=el('div',{class:'ab'});
+ const A=el('div',{class:'card a'});A.innerHTML='<h3>👤 Partner A: Nr. 2, Aufgabe 3</h3><p>Zeichne ein <b>Figuren-Diagramm</b> ins Heft: Namen in Kästchen, Pfeile mit kurzen Beschriftungen zwischen den Figuren. Gib zu jeder Info die Zeile an.</p><p style="margin:.3rem 0"><b>Diese Figuren gehören hinein:</b> Lena · Kaitlyn · Kaitlyn’s mom · Jacob · Matt · Nick · the police officer · Sophie (wird nur erwähnt)</p><p style="margin:.3rem 0"><b>Pfeil-Ideen:</b> <i>is friends with · is the brother of · rescues · doesn’t trust · is angry with · likes</i></p><p style="margin:.3rem 0">Markiere mit einer anderen Farbe: <b>Was ändert sich am Ende</b> zwischen Lena und Matt?</p>';
+ const B=el('div',{class:'card b'});B.innerHTML='<h3>👤 Partner B: Nr. 2, Aufgabe 4</h3><p>Erstelle eine <b>Spannungskurve</b>. Stell zuerst für jeden Teil ein, wie spannend er ist (1 = gar nicht, 10 = extrem):</p>';
+ const sl=el('div',{});'ABCDEFGHI'.split('').forEach(k=>{const r=el('div',{class:'sl'});const v=S.curve[k]||3;const inp=el('input',{type:'range',min:1,max:10,value:v});const o=el('b',{},String(v));inp.oninput=()=>{S.curve[k]=+inp.value;o.textContent=inp.value;save();drawCurve()};r.append(el('b',{},k),inp,o);sl.append(r)});
+ const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 360 200');svg.setAttribute('class','curve');
+ B.append(sl,svg);B.append(el('p',{style:'margin:.6rem 0 0'},'Übertrage die Kurve ins Heft. Schreibe an die <b>zwei spannendsten Stellen</b> die Zeilennummern und markiere den <b>climax</b> (Höhepunkt).'));
+ function drawCurve(){const pts='ABCDEFGHI'.split('').map((k,i)=>[30+i*38,180-(S.curve[k]||3)*16]);let s='<line x1="30" y1="180" x2="345" y2="180" stroke="currentColor" opacity=".4"/><line x1="30" y1="20" x2="30" y2="180" stroke="currentColor" opacity=".4"/>';
+   s+=`<polyline fill="none" stroke="#00539C" stroke-width="4" stroke-linejoin="round" points="${pts.map(p=>p.join(',')).join(' ')}"/>`;
+   let mx=Math.max(...pts.map(p=>p[1]===undefined?0:180-p[1]));pts.forEach((p,i)=>{const top=180-p[1]===mx;s+=`<circle cx="${p[0]}" cy="${p[1]}" r="${top?8:5}" fill="${top?'#FFD662':'#00539C'}" stroke="#00539C" stroke-width="2"/><text x="${p[0]}" y="196" text-anchor="middle" font-size="12" font-weight="900" fill="currentColor">${'ABCDEFGHI'[i]}</text>`});
+   s+='<text x="8" y="26" font-size="11" fill="currentColor">10</text><text x="12" y="178" font-size="11" fill="currentColor">1</text>';svg.innerHTML=s}
+ drawCurve();ab.append(A,B);sec.append(f);sec.append(ab);
+ const c2=el('div',{class:'card'});c2.innerHTML='<h3>⏱ Ablauf</h3>';
+ c2.append(el('p',{style:'margin:.2rem 0'},'<b>🔇 9 Minuten allein</b> an deiner Experten-Aufgabe:'));c2.append(timerBox(9,'allein'));
+ c2.append(el('p',{style:'margin:.6rem 0 .2rem'},'<b>🗣️ 2 Minuten:</b> A erklärt B das Diagramm – B zeichnet es ins eigene Heft ab.'));c2.append(timerBox(2,'A erklärt'));
+ c2.append(el('p',{style:'margin:.6rem 0 .2rem'},'<b>🗣️ 2 Minuten:</b> B erklärt A die Spannungskurve – A zeichnet sie ins eigene Heft ab.'));c2.append(timerBox(2,'B erklärt'));
+ c2.append(checklist('s7',['Mein Titel-Satz steht im Heft.','Meine Experten-Aufgabe ist fertig.','Ich habe die Aufgabe meines Partners übernommen.']));sec.append(c2)},
+s8(sec){const {f,c}=head(STEPS[8]);
+ c.append(el('h3',{},'Can-do check'));const cd=el('div',{class:'cando'});
+ CANDO.forEach((t,i)=>{const row=el('div',{class:'rate-row'});row.append(el('span',{},t));const th=el('div',{class:'thumbs'});['😀','🙂','😕'].forEach(sm=>{const b=el('button',{class:'opt',type:'button'},sm);b.onclick=()=>{S.cando[i]=sm;save();th.querySelectorAll('.opt').forEach(x=>x.classList.toggle('sel',x.textContent===sm));renderSum()};if(S.cando[i]===sm)b.classList.add('sel');th.append(b)});row.append(th);cd.append(row)});
+ c.append(cd);
+ c.append(el('div',{class:'note eb'},'<b>Hausaufgabe: SB S. 21, Nr. 4 b</b> – schreibe den fehlenden Teil zwischen H und I (ca. 100–120 Wörter). Nutze deine Vorhersage aus Schritt 4 als Startpunkt. Prüfe danach: Passt am Ende alles zu Teil I?'));
+ c.append(el('div',{class:'note'},'<b>Schon fertig?</b> Freiwillig weiter mit SB S. 21, Nr. 2, Aufgabe 2 (main plot & subplot) oder Nr. 4 a (Tabelle mit drei Spalten: coincidences · exaggerated language · unexpected reactions – jeweils mit Zeile).'));
+ sec.append(f);
+ const s=el('div',{class:'card',id:'sumcard'});sec.append(s);renderSum()}
+};
+function alertBox(parent,msg){const n=el('div',{class:'fb bad'},msg);parent.append(n);setTimeout(()=>n.remove(),3500)}
+function renderSum(){const s=$('#sumcard');if(!s)return;
+ const g=k=>S.score[k]?`${S.score[k].best} / ${S.score[k].total}`:'–';
+ const nm=S.name||'';s.innerHTML='<h3>📸 Meine Ergebnisübersicht</h3><p>Trage deinen Namen ein, mach einen <b>Screenshot</b> von diesem Kasten und lade ihn im ByCS-Kurs hoch.</p>';
+ const i=el('input',{class:'t',placeholder:'Vor- und Nachname',value:nm,style:'width:100%;max-width:340px'});i.oninput=()=>{S.name=i.value;save()};s.append(i);
+ const t=el('table',{class:'sum'});const rows=[
+  ['Listening 1 – first listening (1–3)',g('L1a')],['Listening 1 – details (4–11)',g('L1b')],['Listening 2 – true / false',g('L2tf')],['Listening 2 – who does what',g('L2who')],['Listening 3 – order of events',g('L3order')],['Listening 3 – name',g('L3b')],['Listening 3 – Part I',g('L3c')],['Words from the story',g('voc')],
+  ['Can-do 1 / 2 / 3',[0,1,2].map(k=>S.cando[k]||'–').join(' ')],
+  ['Heft-Aufgaben abgehakt',Object.keys(S.done).filter(k=>S.done[k]).length+' / 12']];
+ rows.forEach(r=>{const tr=el('tr');tr.append(el('td',{},r[0]),el('td',{},r[1]));t.append(tr)});s.append(t);
+ s.append(el('p',{style:'color:var(--muted);font-size:.85rem;margin:.6rem 0 0'},new Date().toLocaleString('de-DE')+' · Punkte = bestes Ergebnis nach Verbesserung'));
+ const rs=el('button',{class:'btn sec',type:'button',style:'margin-top:10px'},'Alles zurücksetzen');rs.onclick=()=>{if(confirm('Wirklich alle Eingaben löschen?')){S={};try{localStorage.removeItem(STORE)}catch(e){}location.reload()}};s.append(rs)}
+
+/* ============ NAV ============ */
+const nav=$('#nav'),main=$('#main');
+STEPS.forEach((st,i)=>{const b=el('button',{type:'button'},st.nav);b.onclick=()=>go(i);nav.append(b);const sec=el('section',{id:st.id});main.append(sec);BUILD[st.id](sec)});
+function stepDone(i){const id=STEPS[i].id;return Object.keys(S.done).some(k=>k.startsWith(id)&&S.done[k])}
+function go(i){S.step=i;save();document.querySelectorAll('main#main>section').forEach((s,k)=>s.classList.toggle('on',k===i));
+ nav.querySelectorAll('button').forEach((b,k)=>{b.classList.toggle('on',k===i);b.classList.toggle('done',stepDone(k))});
+ $('#prev').disabled=i===0;$('#next').textContent=i===STEPS.length-1?'Fertig ✓':'Weiter →';$('#next').disabled=i===STEPS.length-1;
+ if(i===STEPS.length-1)renderSum();window.scrollTo({top:0,behavior:'smooth'});nav.children[i].scrollIntoView({inline:'center',block:'nearest'})}
+$('#prev').onclick=()=>go(Math.max(0,S.step-1));$('#next').onclick=()=>go(Math.min(STEPS.length-1,S.step+1));
+document.addEventListener('change',()=>nav.querySelectorAll('button').forEach((b,k)=>b.classList.toggle('done',stepDone(k))));
+go(S.step||0);
+
+/* ============ TEACHER ============ */
+$('#tbtn').onclick=()=>{const p=prompt('PIN für den Lehrkraft-Bereich:');if(p===PIN){$('#ov').classList.add('on');document.body.style.overflow='hidden'}else if(p!==null)alert('PIN falsch.')};
+$('#ovx').onclick=()=>{$('#ov').classList.remove('on');document.body.style.overflow=''};
+document.querySelectorAll('#ov .tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#ov .tabs button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('.tp').forEach(t=>t.classList.toggle('hidden',t.id!==b.dataset.t))});
+$('#t1').innerHTML=`<div class="card"><h3>Hinweise für die Vertretung</h3><ul>
+<li>Die Schüler arbeiten <b>allein</b> mit dieser Website (Link + Audios im ByCS-Kurs). Kopfhörer sind angekündigt.</li>
+<li><b>Bis Schritt 5 bleibt das Buch geschlossen</b> (Hörverstehen). Bitte darauf achten.</li>
+<li>🔇 = absolute Ruhe · 🗣️ = Flüstern mit dem Sitznachbarn, <b>nur</b> in Schritt 6 (3 Min.) und Schritt 7 (2 × 2 Min.). Partner A sitzt links, B rechts; bei ungerader Zahl eine Dreiergruppe (zwei B).</li>
+<li>Der Präsentationsmodus (Reiter oben) zeigt Phase, Arbeitsform und Timer groß am Beamer.</li>
+<li>Ein Schüler ohne Tablet arbeitet mit der <b>Druckversion</b>; er braucht trotzdem ein Gerät zum Anhören der Audios.</li>
+<li>Ergebnissicherung: Exercise Book + Screenshot der Ergebnisübersicht (Schritt „Ende“) als Abgabe im ByCS-Kurs.</li></ul></div>
+<div class="card"><h3>Ablauf (90 Min.)</h3><table class="plan"><tr><th>Schritt</th><th>Zeit</th><th>Inhalt</th><th>Form</th></tr>${STEPS.map((s,i)=>`<tr><td><b>${s.nav}</b></td><td>${s.min}′</td><td>${s.title}</td><td>${s.modeTxt}</td></tr>`).join('')}</table>
+<p style="margin-top:.6rem"><b>Audio-Zuordnung</b> (abgeleitet aus der Buchangabe S 1/3–11, je ein Track pro Teil): A = 3 · B = 4 · C = 5 · D = 6 · E = 7 · F = 8 · G = 9 · H = 10 · I = 11.</p>
+<p><b>Wenn die Zeit knapp wird:</b> In Schritt 7 nur Aufgabe 4 (Spannungskurve) allein, ohne Tausch.</p></div>`;
+$('#t2').innerHTML=`<div class="card sol"><h3>Lösungen</h3>
+<p><b>Listening 1:</b> 1 big mall on the other side of Pittsburgh · 2 Kaitlyn’s mom · 3 famous sports star opens a store · 4 three (weeks) · 5 call her · 6 Kaitlyn’s older brother · 7 T-shirt · 8 benches / 5 o’clock · 9 five (minutes) · 10 labor · 11 sick and dizzy; bodyguards help him get away; someone takes hold of Lena</p>
+<p><b>Listening 2 A:</b> ${L2TF.map((q,i)=>`${i+1} ${q.a?'true':'false'+' – '+q.c}`).join(' · ')}</p>
+<p><b>Listening 2 B:</b> ${L2WHO.map((q,i)=>`${i+1} ${WHO[q.a]}`).join(' · ')}</p>
+<p><b>Listening 3 A (Reihenfolge):</b> ${L3ORDER.map((t,i)=>`${i+1}. ${t}`).join(' ')}</p>
+<p><b>Listening 3 B:</b> Nick · <b>D:</b> 1 Matt · 2 still angry about Sophie, but thankful · 3 have a coffee</p>
+<p><b>Words:</b> ${VOC.map(v=>`${v.e} = ${v.g} (l. ${v.l})`).join(' · ')}</p>
+<p><b>Schritt 6, 7 und Hausaufgabe</b> sind offene Aufgaben im Heft – Kontrolle in der Folgestunde.</p></div>`;
+
+/* presentation */
+let pi=0,pl=0,piv=null;
+function pShow(){const st=STEPS[pi];$('#pph').textContent=`Schritt ${st.nav} von ${STEPS.length-1}`;if(pi===0)$('#pph').textContent='Start';$('#pti').textContent=st.title;$('#pmo').textContent=st.modeTxt;pl=st.min*60;$('#pclk').textContent=fmt(pl);clearInterval(piv);piv=null;$('#pst').textContent='▶ Start'}
+function pToggle(){if(piv){clearInterval(piv);piv=null;$('#pst').textContent='▶ Weiter'}else{piv=setInterval(()=>{pl--;$('#pclk').textContent=fmt(Math.max(pl,0));if(pl<=0){clearInterval(piv);piv=null;beep();$('#pst').textContent='⏰'}},1000);$('#pst').textContent='⏸ Pause'}}
+$('#presgo').onclick=()=>{$('#pres').classList.add('on');pShow();try{document.documentElement.requestFullscreen()}catch(e){}};
+$('#pst').onclick=pToggle;$('#prs').onclick=pShow;$('#pn').onclick=()=>{pi=Math.min(STEPS.length-1,pi+1);pShow()};$('#pp').onclick=()=>{pi=Math.max(0,pi-1);pShow()};
+$('#px').onclick=()=>{$('#pres').classList.remove('on');clearInterval(piv);try{document.exitFullscreen()}catch(e){}};
+document.addEventListener('keydown',e=>{if(!$('#pres').classList.contains('on'))return;if(e.code==='Space'){e.preventDefault();pToggle()}if(e.key==='ArrowRight')$('#pn').click();if(e.key==='ArrowLeft')$('#pp').click();if(e.key==='Escape')$('#px').click()});
+</script>
+</body></html>
